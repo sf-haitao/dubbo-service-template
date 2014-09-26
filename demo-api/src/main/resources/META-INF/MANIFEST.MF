@@ -1,0 +1,2 @@
+Api-Export: com.sfebiz.demo.api.DemoService
+Api-Dependency-Type: dubbo
