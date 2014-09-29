@@ -13,12 +13,16 @@
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
-            <groupId>com.pajk.api</groupId>
+            <groupId>com.sfebiz</groupId>
             <artifactId>api-util</artifactId>
         </dependency>
         <dependency>
             <groupId>com.sfebiz</groupId>
             <artifactId>demo-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sfebiz</groupId>
+            <artifactId>demo-client</artifactId>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>

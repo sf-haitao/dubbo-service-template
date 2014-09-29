@@ -88,7 +88,11 @@
                 <artifactId>demo-dao</artifactId>
                 <version>${demo-api_version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.sfebiz</groupId>
+                <artifactId>demo-client</artifactId>
+                <version>${demo-api_version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.sfebiz</groupId>
                 <artifactId>api-util</artifactId>
