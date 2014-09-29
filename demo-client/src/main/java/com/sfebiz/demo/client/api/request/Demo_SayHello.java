@@ -2,9 +2,9 @@
     
 package com.sfebiz.demo.client.api.request;
 
-import com.sfebiz.demo.client.client.LocalException;
-import com.sfebiz.demo.client.client.BaseRequest;
-import com.sfebiz.demo.client.client.SecurityType;
+import com.sfebiz.demo.client.LocalException;
+import com.sfebiz.demo.client.BaseRequest;
+import com.sfebiz.demo.client.SecurityType;
 import com.sfebiz.demo.client.api.resp.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
