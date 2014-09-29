@@ -8,18 +8,18 @@
     <context:annotation-config/>
     <bean id="demoServiceImpl" class="com.sfebiz.demo.service.DemoServiceImpl"/>
     <bean id="dubboApplicationConfig" class="com.alibaba.dubbo.config.ApplicationConfig">
-        <property name="name" value="apitest"/>
+        <property name="name" value="demo"/>
     </bean>
 
     <bean id="dubboRegistryConfig" class="com.alibaba.dubbo.config.RegistryConfig">
-        <property name="address" value="zookeeper://127.0.0.1:2181"/>
+        <property name="address" value="zookeeper://115.29.16.189:2181"/>
     </bean>
 
     <bean id="dubboProtocolConfig" class="com.alibaba.dubbo.config.ProtocolConfig">
         <property name="port" value="-1"/>
     </bean>
     <bean id="loadTestServiceExport" class="com.alibaba.dubbo.config.spring.ServiceBean">
-        <property name="interface" value="com.pajk.apitest.api.LoadTestService"/>
+        <property name="interface" value="com.sfebiz.demo.api.DemoService"/>
         <property name="ref" ref="demoServiceImpl"/>
         <property name="application" ref="dubboApplicationConfig"/>
         <property name="registry" ref="dubboRegistryConfig"/>
