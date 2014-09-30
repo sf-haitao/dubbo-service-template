@@ -24,7 +24,8 @@ public class DemoServiceImpl implements DemoService {
         DemoEntity result = null;
         try {
             result = new DemoEntity();
-            evaluater.evaluate(demoMapper.queryEntity(name), result);
+            DemoDTO demoDTO = demoMapper.queryEntity(name);
+            evaluater.evaluate(result, demoDTO);
         } catch (Throwable throwable) {
             logger.error("sayHello failed!", throwable);
             DubboExtProperty.setErrorCode(DemoReturnCode.DEMO_UNKNOW_ERROR);

@@ -18,7 +18,7 @@
     <bean id="dubboProtocolConfig" class="com.alibaba.dubbo.config.ProtocolConfig">
         <property name="port" value="-1"/>
     </bean>
-    <bean id="loadTestServiceExport" class="com.alibaba.dubbo.config.spring.ServiceBean">
+    <bean id="demoServiceExport" class="com.alibaba.dubbo.config.spring.ServiceBean">
         <property name="interface" value="com.sfebiz.demo.api.DemoService"/>
         <property name="ref" ref="demoServiceImpl"/>
         <property name="application" ref="dubboApplicationConfig"/>

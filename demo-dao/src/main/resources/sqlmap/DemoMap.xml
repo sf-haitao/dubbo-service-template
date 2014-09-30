@@ -3,12 +3,12 @@
 <mapper namespace="com.sfebiz.demo.dao.mapper.DemoMapper">
     <resultMap id="demoDTOMap" type="com.sfebiz.demo.dao.dto.DemoDTO">
         <id column="id" property="id" jdbcType="BIGINT"/>
-        <result column="name" property="username" jdbcType="VARCHAR"/>
+        <result column="username" property="name" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="queryEntity" resultMap="demoDTOMap" parameterType="java.lang.String">
         select id, username
-        from sfebiz_demo_demo
+        from demo
         where username=#{name}
     </select>
 </mapper>
