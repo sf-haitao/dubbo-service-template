@@ -12,7 +12,7 @@ import java.io.InputStream;
 /**
  * Created by guankaiqiang521 on 2014/9/29.
  */
-public class ApiFunctionTest {
+public class DemoTest {
     private static final String url = "http://localhost:8080/m.api";
     private static final String rsa = "你猜";
     @Test
