@@ -2,7 +2,6 @@
 ## 配置Maven  
 将根目录的settings.xml拷贝到~/.m2/目录下，覆盖原来的文件
 
-# Welcome to the dubbo-service-template wiki!
 ## 1. 环境准备
 ### 1.注册中心:
 zookeeper(demo服务需要在注册中心注册);
