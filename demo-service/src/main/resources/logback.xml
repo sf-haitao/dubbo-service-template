@@ -1,7 +1,8 @@
 <configuration debug="true">
+    <property resource="config.properties"/>
     <appender name="ALL" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>/usr/admin/logs/apitest/info/info-%d{yyyy-MM-dd}-%i.log</FileNamePattern>
+            <FileNamePattern>${com.sfebiz.demo.log.home}/info/info-%d{yyyy-MM-dd}-%i.log</FileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy
                     class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>20MB</maxFileSize>

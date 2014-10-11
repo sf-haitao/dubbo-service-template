@@ -14,24 +14,24 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.pajk.api</groupId>
+            <groupId>com.sfebiz</groupId>
             <artifactId>api-util</artifactId>
         </dependency>
     </dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-	                <groupId>org.apache.maven.plugins</groupId>
-	                <artifactId>maven-jar-plugin</artifactId>
-	                <version>${maven-jar-plugin.version}</version>
-	                <configuration>
-	                    <archive>
-	                        <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
-	                    </archive>
-	                </configuration>
-	         </plugin>
-             <plugin>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven-jar-plugin.version}</version>
+                <configuration>
+                    <archive>
+                        <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>${maven-source-plugin.version}</version>
                 <executions>
@@ -43,6 +43,6 @@
                     </execution>
                 </executions>
             </plugin>
-		</plugins>
-	</build>
+        </plugins>
+    </build>
 </project>
