@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+
+<settings>
+	<!-- ======================================================================== -->
+	<!--  Accounts for SCM ONLY                                                   -->
+	<!-- ======================================================================== -->
+	<servers>
+		<server>
+			<id>sfebiz.snapshots.dist</id>
+			<username>dev</username>
+			<password>dev123</password>
+		</server>
+	</servers>
+
+	<!-- ======================================================================== -->
+	<!--  Profiles                                                                -->
+	<!-- ======================================================================== -->
+	<profiles>
+		<profile>
+			<id>sfebiz</id>
+			<repositories>
+				<repository>
+					<id>central</id>
+					<name>sfebiz Repositories Group</name>
+					<url>http://eintsoft.com:21198/nexus/content/groups/public</url>
+				</repository>
+			</repositories>
+			
+			<!-- ======================================================================== -->
+			<!--  Repositories for maven plugins          -->
+			<!-- ======================================================================== -->
+			<pluginRepositories>
+				<pluginRepository>
+                   <id>central</id>
+                   <name>sfebiz Plugin Repos Group</name>
+				   <url>http://eintsoft.com:21198/nexus/content/groups/public/</url>
+				</pluginRepository>
+			</pluginRepositories>
+		</profile>
+	</profiles>
+
+	<activeProfiles>
+            <activeProfile>sfebiz</activeProfile>
+	</activeProfiles>
+</settings>
