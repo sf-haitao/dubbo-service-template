@@ -27,8 +27,8 @@ public class ApiSdkJavaGeneratorTest {
     @Test
     public void testJavaGenertor() throws ParserConfigurationException, IOException, SAXException {
         Properties prop = new Properties();
-        //        prop.setProperty("net.pocrd.apiSdkJavaLocation", "/myworkspace/dubbo-service-template/demo-client/src/main/java/com/sfebiz/demo/client");
-        //        prop.setProperty("net.pocrd.apiSdkJavaPkgName", "com.sfebiz.demo.client");
+        prop.setProperty("net.pocrd.apiSdkJavaLocation", "/myworkspace/dubbo-service-template/demo-client/src/main/java/com/sfebiz/demo/client");
+        prop.setProperty("net.pocrd.apiSdkJavaPkgName", "com.sfebiz.demo.client");
         prop.load(ApiSdkJavaGeneratorTest.class.getResourceAsStream("/config.properties"));
         CodeGenConfig.init(prop);
         List<ApiMethodInfo> infoList = ApiManager.parseApi(DemoService.class, new DemoServiceImpl());
