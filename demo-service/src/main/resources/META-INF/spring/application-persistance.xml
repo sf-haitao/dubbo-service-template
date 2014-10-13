@@ -51,7 +51,7 @@
             </bean>
         </property>
     </bean>
-    <bean id="resourceDOMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <bean id="demoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
         <property name="mapperInterface" value="com.sfebiz.demo.dao.mapper.DemoMapper"/>
     </bean>
