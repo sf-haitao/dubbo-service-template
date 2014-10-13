@@ -17,7 +17,6 @@
         <module>demo-api</module>
         <module>demo-service</module>
         <module>demo-dao</module>
-        <module>demo-client</module>
         <module>demo-autotest</module>
     </modules>
 
@@ -87,12 +86,6 @@
                 <groupId>com.sfebiz</groupId>
                 <artifactId>demo-dao</artifactId>
                 <version>${demo-api_version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.sfebiz</groupId>
-                <artifactId>demo-client</artifactId>
-                <version>${demo-api_version}</version>
-                <scope>test</scope>
             </dependency>
 
             <dependency>
