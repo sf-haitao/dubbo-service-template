@@ -5,6 +5,8 @@ import com.sfebiz.demo.client.ApiContext;
 import com.sfebiz.demo.client.BaseRequest;
 import com.sfebiz.demo.client.ServerResponse;
 import com.sfebiz.demo.client.api.request.Demo_SayHello;
+import com.sfebiz.demo.client.api.resp.Api_DEMO_DemoEntity;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.InputStream;
@@ -26,5 +28,8 @@ public class DemoTest {
                                             return context.fillResponse(requests, is);
                                         }
                                     });
+        Api_DEMO_DemoEntity resp = sayHello.getResponse();
+        Assert.assertEquals(resp.id, 1);
+        Assert.assertEquals(resp.name, "abc");
     }
 }
