@@ -44,19 +44,6 @@ public class ApiContext {
     private String          dynamic         = null;
     private static String rsaPubKey;
 
-    /**
-     * @param appid
-     * @param vercode
-     *
-     * @see com.pingan.jk.client.ApiContext 请设置rsapublickey
-     * @deprecated
-     */
-    @Deprecated
-    public ApiContext(String appid, int vercode) {
-        this.appid = appid;
-        this.vercode = vercode;
-    }
-
     public ApiContext(String appid, int vercode, String rsaPublicKey) {
         this.appid = appid;
         this.vercode = vercode;
@@ -378,7 +365,7 @@ public class ApiContext {
             }
 
             if (securityType == 0) {
-                sb.append("jk.pingan.com");
+                sb.append("sfhaitao.xyz!");
                 if (ApiConfig.isDebug) {
                     logger.info("before sig:" + sb.toString());
                 }

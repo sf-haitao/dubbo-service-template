@@ -6,7 +6,7 @@ import com.sfebiz.demo.client.util.CompileConfig;
 /**
  * Android 的日志实现
  * 
- * @author rendong@jk.pingan.com
+ * @author rendong
  * 
  */
 class AndroidLogger implements Logger {

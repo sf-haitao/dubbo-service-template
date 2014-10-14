@@ -3,7 +3,7 @@ package com.sfebiz.demo.client.logger;
 
 /**
  * 日志类
- * @author rendong@jk.pingan.com
+ * @author rendong
  *
  */
 public interface Logger {
