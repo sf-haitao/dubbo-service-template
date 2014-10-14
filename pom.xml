@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
@@ -14,10 +15,10 @@
     <version>0.1.0-SNAPSHOT</version>
 
     <modules>
-        <module>demo-api</module>
-        <module>demo-service</module>
-        <module>demo-dao</module>
-        <module>demo-autotest</module>
+        <module>api</module>
+        <module>service</module>
+        <module>dao</module>
+        <module>autotest</module>
     </modules>
 
     <build>
@@ -51,11 +52,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <parent_version>1.0.0</parent_version>
 
+        <api-util_version>1.0.0-SNAPSHOT</api-util_version>
         <!-- dependency versions -->
         <!-- 2nd party libs-->
-        <demo-api_version>0.1.0-SNAPSHOT</demo-api_version>
-        <demo-service_version>0.1.0-SNAPSHOT</demo-service_version>
-
+        <demo_version>0.1.0-SNAPSHOT</demo_version>
         <!-- common libs -->
         <spring_version>4.0.5.RELEASE</spring_version>
         <dubbo_version>2.5.3-notification-fix</dubbo_version>
@@ -79,19 +79,19 @@
         <dependencies>
             <dependency>
                 <groupId>com.sfebiz</groupId>
-                <artifactId>demo-api</artifactId>
-                <version>${demo-api_version}</version>
+                <artifactId>api</artifactId>
+                <version>${demo_version}</version>
             </dependency>
             <dependency>
                 <groupId>com.sfebiz</groupId>
-                <artifactId>demo-dao</artifactId>
-                <version>${demo-api_version}</version>
+                <artifactId>dao</artifactId>
+                <version>${demo_version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.sfebiz</groupId>
                 <artifactId>api-util</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>${api-util_version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.slf4j</groupId>

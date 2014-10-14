@@ -9,7 +9,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>demo-dao</artifactId>
+    <artifactId>dao</artifactId>
     <packaging>jar</packaging>
     <build>
         <finalName>demo-dao</finalName>

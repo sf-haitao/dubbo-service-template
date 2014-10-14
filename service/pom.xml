@@ -9,7 +9,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>demo-service</artifactId>
+    <artifactId>service</artifactId>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
@@ -18,11 +18,11 @@
         </dependency>
         <dependency>
             <groupId>com.sfebiz</groupId>
-            <artifactId>demo-api</artifactId>
+            <artifactId>api</artifactId>
         </dependency>
         <dependency>
             <groupId>com.sfebiz</groupId>
-            <artifactId>demo-dao</artifactId>
+            <artifactId>dao</artifactId>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
