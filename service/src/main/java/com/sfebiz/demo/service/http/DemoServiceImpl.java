@@ -24,4 +24,8 @@ public class DemoServiceImpl implements DemoService {
         evaluater.evaluate(result, demoDTO);
         return result;
     }
+    @Override
+    public DemoEntity tryError(String in) {
+        throw new RuntimeException("try error!");
+    }
 }

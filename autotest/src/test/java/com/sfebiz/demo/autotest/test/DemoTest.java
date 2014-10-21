@@ -5,6 +5,7 @@ import com.sfebiz.demo.client.ApiContext;
 import com.sfebiz.demo.client.BaseRequest;
 import com.sfebiz.demo.client.ServerResponse;
 import com.sfebiz.demo.client.api.request.Demo_SayHello;
+import com.sfebiz.demo.client.api.request.Demo_TryError;
 import com.sfebiz.demo.client.api.resp.Api_DEMO_DemoEntity;
 import org.junit.Assert;
 import org.junit.Test;
@@ -31,5 +32,19 @@ public class DemoTest {
         Api_DEMO_DemoEntity resp = sayHello.getResponse();
         Assert.assertEquals(resp.id, 1);
         Assert.assertEquals(resp.name, "abc");
+    }
+
+    @Test
+    public void tryErrorTest() {
+        final ApiContext context = new ApiContext("1", 123, RSA_PRIKEY);
+        Demo_TryError tryError = new Demo_TryError("abc");
+        final BaseRequest[] requests = new BaseRequest[]{tryError};
+        WebRequestUtil.fillResponse(url, context.getParameterString(requests), String.valueOf(System.currentTimeMillis()), true,
+                                    new ResponseFiller() {
+                                        public ServerResponse fill(InputStream is) {
+                                            return context.fillResponse(requests, is);
+                                        }
+                                    });
+        Assert.assertEquals(tryError.getReturnCode(), -100);
     }
 }

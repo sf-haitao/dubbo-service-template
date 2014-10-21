@@ -21,7 +21,9 @@ public class ThrowableCatcher {
         try {
             retVal = pjp.proceed();
         } catch (Throwable throwable) {
-            logger.error("execute method:[" + pjp.getSignature() + "] failed with arguments:[" + JSON.toJSONString(pjp.getArgs() + "]!"), throwable);
+            logger.error(
+                    "execute failed, message: {\"method\":\"" + pjp.getSignature() + "\",\"arguments\":" + JSON.toJSONString(pjp.getArgs()) + "!",
+                    throwable);
             DubboExtProperty.setErrorCode(DemoReturnCode.DEMO_UNKNOW_ERROR);//这个地方设置内部异常error code
         } finally {
             return retVal;

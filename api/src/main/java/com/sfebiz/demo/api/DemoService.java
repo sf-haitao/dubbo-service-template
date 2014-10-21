@@ -13,4 +13,9 @@ public interface DemoService {
     public DemoEntity sayHello(
             @ApiParameter(required = true, name = "name", desc = "say hello")
             String name);
+
+    @HttpApi(name = "demo.tryError", desc = "demo error", security = SecurityType.None, owner = "demo")
+    public DemoEntity tryError(
+            @ApiParameter(required = true, name = "in", desc = "input param")
+            String in);
 }
