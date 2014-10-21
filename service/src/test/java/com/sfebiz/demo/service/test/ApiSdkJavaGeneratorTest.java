@@ -1,7 +1,7 @@
 package com.sfebiz.demo.service.test;
 
 import com.sfebiz.demo.api.DemoService;
-import com.sfebiz.demo.service.DemoServiceImpl;
+import com.sfebiz.demo.service.http.DemoServiceImpl;
 import net.pocrd.core.ApiDocumentationHelper;
 import net.pocrd.core.ApiManager;
 import net.pocrd.core.generator.ApiSdkJavaGenerator;

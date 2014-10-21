@@ -2,13 +2,17 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd"
        default-lazy-init="true">
     <context:annotation-config/>
+    <aop:aspectj-autoproxy/>
+    <bean id="throwableCatcher" class="com.sfebiz.demo.common.ThrowableCatcher"/>
     <context:property-placeholder file-encoding="UTF-8" ignore-resource-not-found="true"
                                   location="classpath:config.properties"/>
-    <bean id="demoServiceImpl" class="com.sfebiz.demo.service.DemoServiceImpl"/>
+    <bean id="demoServiceImpl" class="com.sfebiz.demo.service.http.DemoServiceImpl"/>
     <bean id="dubboApplicationConfig" class="com.alibaba.dubbo.config.ApplicationConfig">
         <property name="name" value="demo"/>
     </bean>
