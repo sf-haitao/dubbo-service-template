@@ -25,9 +25,8 @@ public class ThrowableCatcher {
                     "execute failed, message: {\"method\":\"" + pjp.getSignature() + "\",\"arguments\":" + JSON.toJSONString(pjp.getArgs()) + "!",
                     throwable);
             DubboExtProperty.setErrorCode(DemoReturnCode.DEMO_UNKNOW_ERROR);//这个地方设置内部异常error code
-        } finally {
-            return retVal;
         }
+        return retVal;
     }
 }
 
