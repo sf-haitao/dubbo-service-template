@@ -3,6 +3,7 @@ package com.sfebiz.demo.service.http;
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.sfebiz.demo.api.DemoService;
+import com.sfebiz.demo.api.DemoThirdPartyService;
 import com.sfebiz.demo.dao.dto.DemoDTO;
 import com.sfebiz.demo.dao.mapper.DemoMapper;
 import com.sfebiz.demo.entity.DemoEntity;
@@ -16,11 +17,14 @@ public class DemoServiceImpl implements DemoService {
     private static final Logger    logger    = LoggerFactory.getLogger(DemoServiceImpl.class);
     private static final Evaluater evaluater = EvaluaterProvider.getEvaluater(DemoEntity.class, DemoDTO.class);
     @Autowired
-    private DemoMapper demoMapper;
+    private DemoMapper            demoMapper;
+    @Autowired
+    private DemoThirdPartyService demoThirdPartyService;
     @Override
     public DemoEntity sayHello(String name) {
         DemoEntity result = new DemoEntity();
         DemoDTO demoDTO = demoMapper.queryEntity(name);
+        demoDTO.setId(demoThirdPartyService.testThirdParty(demoDTO.getId()));
         evaluater.evaluate(result, demoDTO);
         return result;
     }

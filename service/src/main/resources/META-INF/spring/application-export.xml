@@ -9,10 +9,11 @@
        default-lazy-init="true">
     <context:annotation-config/>
     <aop:aspectj-autoproxy/>
-    <bean id="throwableCatcher" class="com.sfebiz.demo.common.ThrowableCatcher"/>
     <context:property-placeholder file-encoding="UTF-8" ignore-resource-not-found="true"
                                   location="classpath:config.properties"/>
+    <bean id="throwableCatcher" class="com.sfebiz.demo.common.ThrowableCatcher"/>
     <bean id="demoServiceImpl" class="com.sfebiz.demo.service.http.DemoServiceImpl"/>
+    <bean id="demoThirdPartyServiceImpl" class="com.sfebiz.demo.service.DemoThirdPartyServiceImpl"/>
     <bean id="dubboApplicationConfig" class="com.alibaba.dubbo.config.ApplicationConfig">
         <property name="name" value="demo"/>
     </bean>
@@ -27,6 +28,15 @@
     <bean id="demoServiceExport" class="com.alibaba.dubbo.config.spring.ServiceBean">
         <property name="interface" value="com.sfebiz.demo.api.DemoService"/>
         <property name="ref" ref="demoServiceImpl"/>
+        <property name="application" ref="dubboApplicationConfig"/>
+        <property name="registry" ref="dubboRegistryConfig"/>
+        <property name="protocol" ref="dubboProtocolConfig"/>
+        <property name="version" value="${dubbo.reference.version}"/>
+        <property name="timeout" value="${dubbo.export.timeout}"/>
+    </bean>
+    <bean id="demoThirdPartyServiceExport" class="com.alibaba.dubbo.config.spring.ServiceBean">
+        <property name="interface" value="com.sfebiz.demo.api.DemoThirdPartyService"/>
+        <property name="ref" ref="demoThirdPartyServiceImpl"/>
         <property name="application" ref="dubboApplicationConfig"/>
         <property name="registry" ref="dubboRegistryConfig"/>
         <property name="protocol" ref="dubboProtocolConfig"/>
