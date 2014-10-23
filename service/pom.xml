@@ -96,6 +96,10 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+        <dependency>
+          <groupId>com.aliyun.openservices</groupId>
+          <artifactId>ons-client</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <finalName>demo-service</finalName>
