@@ -21,7 +21,7 @@ public interface DemoService {
             @ApiParameter(required = true, name = "in", desc = "input param")
             String in);
 
-    @HttpApi(name = "demo.testUserLogin", desc = "demo error", security = SecurityType.UserLogin, owner = "demo")
+    @HttpApi(name = "demo.testUserLogin", desc = "demo user login api", security = SecurityType.UserLogin, owner = "demo")
     public String testUserLogin(
             @ApiAutowired(CommonParameter.deviceId)
             long deviceId,

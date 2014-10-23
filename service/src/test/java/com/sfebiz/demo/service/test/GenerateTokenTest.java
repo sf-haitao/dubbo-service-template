@@ -35,5 +35,7 @@ public class GenerateTokenTest {
         assertEquals(callerInfo.expire, callerInfo1.expire);
         assertArrayEquals(callerInfo.key, callerInfo1.key);
         assertEquals(callerInfo.securityLevel, callerInfo1.securityLevel);
+        String dtk = aesTokenHelper.generateStringDeviceToken(callerInfo);
+        System.out.println("dtk:" + tk);
     }
 }
