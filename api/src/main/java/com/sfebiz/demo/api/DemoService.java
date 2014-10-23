@@ -2,9 +2,11 @@ package com.sfebiz.demo.api;
 
 import com.sfebiz.demo.entity.DemoEntity;
 import com.sfebiz.demo.entity.DemoReturnCode;
+import net.pocrd.annotation.ApiAutowired;
 import net.pocrd.annotation.ApiGroup;
 import net.pocrd.annotation.ApiParameter;
 import net.pocrd.annotation.HttpApi;
+import net.pocrd.define.CommonParameter;
 import net.pocrd.define.SecurityType;
 
 @ApiGroup(name = "demo", minCode = 1, maxCode = 1000000, codeDefine = DemoReturnCode.class, owner = "demo")
@@ -18,4 +20,11 @@ public interface DemoService {
     public DemoEntity tryError(
             @ApiParameter(required = true, name = "in", desc = "input param")
             String in);
+
+    @HttpApi(name = "demo.testUserLogin", desc = "demo error", security = SecurityType.UserLogin, owner = "demo")
+    public String testUserLogin(
+            @ApiAutowired(CommonParameter.deviceId)
+            long deviceId,
+            @ApiAutowired(CommonParameter.userId)
+            long userId);
 }

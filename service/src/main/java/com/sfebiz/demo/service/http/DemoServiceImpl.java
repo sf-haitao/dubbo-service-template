@@ -8,6 +8,8 @@ import com.sfebiz.demo.dao.dto.DemoDTO;
 import com.sfebiz.demo.dao.mapper.DemoMapper;
 import com.sfebiz.demo.entity.DemoEntity;
 import com.sfebiz.demo.entity.DemoReturnCode;
+import net.pocrd.annotation.ApiAutowired;
+import net.pocrd.define.CommonParameter;
 import net.pocrd.define.Evaluater;
 import net.pocrd.dubboext.DubboExtProperty;
 import net.pocrd.util.EvaluaterProvider;
@@ -31,5 +33,10 @@ public class DemoServiceImpl implements DemoService {
     @Override
     public DemoEntity tryError(String in) {
         throw new RuntimeException("try error!");
+    }
+    @Override
+    public String testUserLogin(long deviceId, long userId) {
+        System.out.println("deviceId:" + deviceId + ", userId:" + userId);
+        return "deviceId:" + deviceId + ", userId:" + userId;
     }
 }
