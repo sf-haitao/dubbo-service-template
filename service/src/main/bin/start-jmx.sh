@@ -1,0 +1,1 @@
+java  -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=1099 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false  -Djava.ext.dirs=./lib com.alibaba.dubbo.container.Main
