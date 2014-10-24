@@ -7,11 +7,7 @@ import com.sfebiz.demo.api.DemoThirdPartyService;
 import com.sfebiz.demo.dao.dto.DemoDTO;
 import com.sfebiz.demo.dao.mapper.DemoMapper;
 import com.sfebiz.demo.entity.DemoEntity;
-import com.sfebiz.demo.entity.DemoReturnCode;
-import net.pocrd.annotation.ApiAutowired;
-import net.pocrd.define.CommonParameter;
 import net.pocrd.define.Evaluater;
-import net.pocrd.dubboext.DubboExtProperty;
 import net.pocrd.util.EvaluaterProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 
