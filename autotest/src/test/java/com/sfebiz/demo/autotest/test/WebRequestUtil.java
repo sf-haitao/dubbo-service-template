@@ -33,20 +33,54 @@ public class WebRequestUtil {
     private static       CloseableHttpClient hc                         = null;
     private static       RequestConfig       rc                         = null;
     static {
-        InputStream input = WebRequestUtil.class.getResourceAsStream("/config.properties");
+        InputStream input = WebRequestUtil.class.getResourceAsStream("/_dev_debug_config.properties");
         if (input != null) {
             Properties prop = new Properties();
             try {
                 prop.load(input);
-                TestConfig.init(prop);
+                DebugConfig.init(prop);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
+    /**
+     * 调试配置
+     */
+    public static class DebugConfig {
+        private static DebugConfig instance = new DebugConfig();
+        private DebugConfig() {
+        }
+        public static DebugConfig getInstance() {
+            return instance;
+        }
+        public static final void init(Properties properties) {
+            synchronized (DebugConfig.class) {
+                if (instance == null) {
+                    instance = new DebugConfig();
+                }
+                if (properties != null) {
+                    instance.setDebugDubboVersion(properties.getProperty("debug.dubbo.version"));
+                }
+            }
+        }
+
+        private String debugDubboVersion;
+
+        public String getDebugDubboVersion() {
+            return debugDubboVersion;
+        }
+        void setDebugDubboVersion(String debugDubboVersion) {
+            if (debugDubboVersion != null && debugDubboVersion.length() != 0) {
+                this.debugDubboVersion = debugDubboVersion;
+                System.out.println("debug.dubbo.version:" + debugDubboVersion);
+            }
+        }
+    }
+
     private static void setDebugDubboVersion(HttpRequestBase requestBase) {
-        String debugVersion = TestConfig.getInstance().getDebugDubboVersion();
+        String debugVersion = DebugConfig.getInstance().getDebugDubboVersion();
         if (debugVersion != null && debugVersion.length() != 0) {
             requestBase.setHeader("DUBBO-VERSION", debugVersion);
         }
