@@ -28,8 +28,8 @@ JAVA_OPT_7="-cp ${CLASSPATH}"
 JAVA_OPTS="${JAVA_OPT_1} ${JAVA_OPT_2} ${JAVA_OPT_4} ${JAVA_OPT_5} ${JAVA_OPT_7}"
 
 JAVA="$JAVA_HOME/bin/java"
-#设定关键字，用来查找服务，stop时关闭服务
-KEYWORD="com.sfebiz.demo"
+#设定关键字，服务启动入口
+KEYWORD="com.alibaba.dubbo.container.Main"
 
 #nohup $JAVA $JAVA_OPTS com.alibaba.dubbo.container.Main  >> server_nohup.log 2>&1 & echo $! > $pidfile
 
