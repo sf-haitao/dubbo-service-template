@@ -21,7 +21,7 @@ import java.util.List;
 public class ApiContext {
     private static final Logger logger       = LoggerFactory.getLogger(ApiContext.class);
     private static final Object signLocker   = new Object();
-    private static       String rsaPublicKey = null;
+    private static       String rsaPublicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDoIjY+VacM/v0q47oQkbE4eVo4AS/Px07EMCmlYmRjY9x1OeippSppQ1eNRIuFCbZRqpMoayDO68UdWPCSqOt1I8Uw03MzVDmy38ZBo6dVTRrqWW9z7vbQQ1nWkEcUWcRTIQIktQ2ptO4AOlZa1x1/zvsNBodTNqhqCGPeTNUwyQIDAQAB";
 
     private String appid           = null;
     private int    vercode         = 0;
@@ -55,7 +55,7 @@ public class ApiContext {
         this.dynamic = dynamic;
     }
 
-    private synchronized void setDeviceInfo(long deviceId, String deviceSecret, String deviceToken) {
+    public void setDeviceInfo(long deviceId, String deviceSecret, String deviceToken) {
         this.deviceId = deviceId;
         this.deviceSecret = deviceSecret;
         this.deviceToken = deviceToken;
@@ -226,6 +226,11 @@ public class ApiContext {
     }
 
     private void signRequest(ParameterList params, int securityType) {
+        if (ApiConfig.isDebug) {
+            if (securityType == SecurityType.Internal || securityType == SecurityType.Integrate) {
+                return;
+            }
+        }
         if (params.containsKey(CommonParameter.signature)) {
             return;
         }
@@ -269,13 +274,27 @@ public class ApiContext {
             if (((securityType & SecurityType.UserLogin) > 0) | ((securityType & SecurityType.UserTrustedDevice) > 0)) {
                 throw new LocalException(LocalException.TOKEN_MISSING);
             }
-            if (securityType > 0) {
-                if (deviceSecret != null) {
-                    if (!params.containsKey(CommonParameter.deviceToken)) {
-                        params.put(CommonParameter.deviceToken, deviceToken);
+            if (ApiConfig.isDebug) {
+                if (securityType > 0) {
+                    if (deviceSecret != null) {
+                        if (!params.containsKey(CommonParameter.deviceToken)) {
+                            params.put(CommonParameter.deviceToken, deviceToken);
+                        }
+                    } else if (securityType == SecurityType.Internal || securityType == SecurityType.Integrate) {
+                        // do nothing.
+                    } else {
+                        throw new LocalException(LocalException.TOKEN_MISSING);
                     }
-                } else {
-                    throw new LocalException(LocalException.TOKEN_MISSING);
+                }
+            } else {
+                if (securityType > 0) {
+                    if (deviceSecret != null) {
+                        if (!params.containsKey(CommonParameter.deviceToken)) {
+                            params.put(CommonParameter.deviceToken, deviceToken);
+                        }
+                    } else {
+                        throw new LocalException(LocalException.TOKEN_MISSING);
+                    }
                 }
             }
         }

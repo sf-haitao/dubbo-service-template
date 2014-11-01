@@ -18,6 +18,7 @@ public class DemoServiceImpl implements DemoService {
     private DemoMapper            demoMapper;
     @Autowired
     private DemoThirdPartyService demoThirdPartyService;
+
     @Override
     public DemoEntity sayHello(String name) {
         DemoEntity result = new DemoEntity();
@@ -26,10 +27,17 @@ public class DemoServiceImpl implements DemoService {
         evaluater.evaluate(result, demoDTO);
         return result;
     }
+
     @Override
     public DemoEntity tryError(String in) {
         throw new RuntimeException("try error!");
     }
+
+    @Override
+    public String testRegistedDevice() {
+        return "test";
+    }
+
     @Override
     public String testUserLogin(long deviceId, long userId) {
         System.out.println("deviceId:" + deviceId + ", userId:" + userId);

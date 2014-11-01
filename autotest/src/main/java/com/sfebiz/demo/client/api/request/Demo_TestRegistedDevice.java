@@ -11,18 +11,18 @@ import org.json.JSONObject;
 import java.util.List;
 
 /**
- * demo user login api
+ * demo registed device
  * 
  * @author demo
  *
  */
-public class Demo_TestUserLogin extends BaseRequest<Api_StringResp> {
+public class Demo_TestRegistedDevice extends BaseRequest<Api_StringResp> {
     
     /**
      * 当前请求的构造函数，以下参数为该请求的必填参数
      */
-    public Demo_TestUserLogin() {
-        super("demo.testUserLogin", SecurityType.UserLogin);
+    public Demo_TestRegistedDevice() {
+        super("demo.testRegistedDevice", SecurityType.RegisteredDevice);
         
     }
     /**

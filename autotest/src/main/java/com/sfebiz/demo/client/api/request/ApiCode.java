@@ -6,8 +6,6 @@ package com.sfebiz.demo.client.api.request;
  */
 public class ApiCode {
     
-    /** 未分配返回值 服务端: */
-    public static final int NO_ASSIGN = -2147483648;
     /** 用户被锁定 服务端: */
     public static final int USER_LOCKED = -370;
     /** token错误 服务端: */
@@ -22,20 +20,14 @@ public class ApiCode {
     public static final int APPID_NOT_EXIST = -280;
     /** 上行短信尚未收到 服务端: */
     public static final int UPLINK_SMS_NOT_RECEIVED = -270;
-    /** 手机动态密码错误 服务端: */
-    public static final int DYNAMIC_CODE_ERROR = -260;
     /** 手机号未绑定 服务端: */
     public static final int MOBILE_NOT_REGIST = -250;
-    /** 接口已升级 服务端: */
-    public static final int API_UPGRADE = -220;
     /** 请求解析错误 服务端: */
     public static final int REQUEST_PARSE_ERROR = -200;
     /** 非法的请求组合 服务端: */
     public static final int ILLEGAL_MULTIAPI_ASSEMBLY = -190;
     /** 签名错误 服务端: */
     public static final int SIGNATURE_ERROR = -180;
-    /** 访问被拒绝 服务端: */
-    public static final int ACCESS_DENIED = -160;
     /** 参数错误 服务端: */
     public static final int PARAMETER_ERROR = -140;
     /** mt参数服务端无法识别 服务端: */
@@ -44,4 +36,12 @@ public class ApiCode {
     public static final int UNKNOWN_ERROR = -100;
     /** 成功 服务端: */
     public static final int SUCCESS = 0;
+    /** 未分配返回值 服务端: */
+    public static final int NO_ASSIGN = -2147483648;
+    /** 手机动态密码错误 服务端: */
+    public static final int DYNAMIC_CODE_ERROR = -260;
+    /** 接口已升级 服务端: */
+    public static final int API_UPGRADE = -220;
+    /** 访问被拒绝 服务端: */
+    public static final int ACCESS_DENIED = -160;
 }
