@@ -82,12 +82,12 @@ public class ApiContext {
         return appid;
     }
 
-    public void setUserTokenExpire(long time) {
-        userTokenExpire = time;
-    }
-
     public long getUserTokenExpire() {
         return userTokenExpire;
+    }
+
+    public void setUserTokenExpire(long time) {
+        userTokenExpire = time;
     }
 
     public boolean hasDeviceInfo() {
@@ -212,6 +212,10 @@ public class ApiContext {
             }
         }
         return commonResponse;
+    }
+
+    public ServerResponse fillResponse(BaseRequest<?> request, InputStream data) {
+        return fillResponse(new BaseRequest<?>[] { request }, data);
     }
 
     public void fillError(BaseRequest<?> request, int code) {

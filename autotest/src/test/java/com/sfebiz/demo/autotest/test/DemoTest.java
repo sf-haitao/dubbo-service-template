@@ -5,9 +5,7 @@ import com.sfebiz.demo.client.ApiConfig;
 import com.sfebiz.demo.client.ApiContext;
 import com.sfebiz.demo.client.BaseRequest;
 import com.sfebiz.demo.client.ServerResponse;
-import com.sfebiz.demo.client.api.request.Demo_SayHello;
-import com.sfebiz.demo.client.api.request.Demo_TestUserLogin;
-import com.sfebiz.demo.client.api.request.Demo_TryError;
+import com.sfebiz.demo.client.api.request.*;
 import com.sfebiz.demo.client.api.resp.Api_DEMO_DemoEntity;
 import org.junit.Assert;
 import org.junit.Test;
@@ -37,15 +35,15 @@ public class DemoTest {
     @Test
     public void sayHelloTest() {
         final ApiContext context = new ApiContext("1", 123);
-        Demo_SayHello sayHello = new Demo_SayHello("abc");
-        final BaseRequest[] requests = new BaseRequest[] { sayHello };
-        WebRequestUtil.fillResponse(url, context.getParameterString(requests), String.valueOf(System.currentTimeMillis()), true,
+        final Demo_SayHello sayHello = new Demo_SayHello("abc");
+        WebRequestUtil.fillResponse(url, context.getParameterString(sayHello), String.valueOf(System.currentTimeMillis()), true,
                 new ResponseFiller() {
                     public ServerResponse fill(InputStream is) {
-                        return context.fillResponse(requests, is);
+                        return context.fillResponse(sayHello, is);
                     }
                 });
         Api_DEMO_DemoEntity resp = sayHello.getResponse();
+        Assert.assertEquals(ApiCode.SUCCESS, sayHello.getReturnCode());
         Assert.assertEquals(resp.id, 1);
         Assert.assertEquals(resp.name, "abc");
     }
@@ -53,20 +51,34 @@ public class DemoTest {
     @Test
     public void tryErrorTest() {
         final ApiContext context = new ApiContext("1", 123);
-        Demo_TryError tryError = new Demo_TryError("abc");
-        final BaseRequest[] requests = new BaseRequest[] { tryError };
-        WebRequestUtil.fillResponse(url, context.getParameterString(requests), String.valueOf(System.currentTimeMillis()), true,
+        final Demo_TryError tryError = new Demo_TryError("abc");
+        WebRequestUtil.fillResponse(url, context.getParameterString(tryError), String.valueOf(System.currentTimeMillis()), true,
                 new ResponseFiller() {
                     public ServerResponse fill(InputStream is) {
-                        return context.fillResponse(requests, is);
+                        return context.fillResponse(tryError, is);
                     }
                 });
-        Assert.assertEquals(tryError.getReturnCode(), -100);
+        Assert.assertEquals(-100, tryError.getReturnCode());
+    }
+
+    @Test
+    public void testRegistedDevice(){
+        final ApiContext context = new ApiContext("1", 123);
+        initWithDeviceInfo(context);
+        final Demo_TestRegistedDevice regiestedDevice = new Demo_TestRegistedDevice();
+        WebRequestUtil.fillResponse(url, context.getParameterString(regiestedDevice), String.valueOf(System.currentTimeMillis()), true,
+                new ResponseFiller() {
+                    public ServerResponse fill(InputStream is) {
+                        return context.fillResponse(regiestedDevice, is);
+                    }
+                });
+        Assert.assertEquals(ApiCode.SUCCESS, regiestedDevice.getReturnCode());
     }
 
     @Test
     public void testUserLogin() {
         final ApiContext context = new ApiContext("1", 123);
+        initWithUserInfo(context);
         Demo_TestUserLogin userLogin = new Demo_TestUserLogin();
         final BaseRequest[] requests = new BaseRequest[] { userLogin };
         WebRequestUtil.fillResponse(url, context.getParameterString(requests), String.valueOf(System.currentTimeMillis()), true,
@@ -76,5 +88,6 @@ public class DemoTest {
                     }
                 });
         System.out.println(userLogin.getResponse().value);
+        Assert.assertEquals(ApiCode.SUCCESS, userLogin.getReturnCode());
     }
 }
