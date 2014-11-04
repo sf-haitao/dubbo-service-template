@@ -8,6 +8,6 @@ public class SecurityType {
 	public static final int MobileOwnerTrustedDevice = 0x1000;
 	public static final int UserLogin = 0x2000;
 	public static final int UserLoginAndMobileOwner = UserLogin + MobileOwner;
-    public static final int Integrate = 0x10000000;
+    public static final int Integrated = 0x10000000;
     public static final int Internal = 0x20000000;
 }
