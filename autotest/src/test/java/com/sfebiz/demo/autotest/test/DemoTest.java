@@ -20,8 +20,8 @@ public class DemoTest {
     private static final long   deviceId     = 1414807058834L;
     private static final String deviceSecret = "581bb3c7f2d09e4d2f07f69706fff13f261f4cfa2038cd2ab7bb46040ca2d568";
     private static final String deviceToken  = "jxpvuVNWcYb75UlLHC3QyptGUwn0V+LDzdi/GMTLcmGN1rmpX80ze7hRE8peb0dbjfUWi52dEoaZy6YCJZcF9L4f+2gJXMjncRCFhGY3AHo=";
-    private static final long   userId       = 21L;
-    private static final String userToken    = "vPVQUVm8fP9sJ0Bu3gxbT/U9D1KcVfMklq+Y6DUDwIUxRkNTapEv+RlUyE95XTA9K5LPgIYW7UOOltOR8ZOsBJi1p/hkudlVJkWfiWXWUX4=";
+    private static final long   userId       = 22L;
+    private static final String userToken    = "F3Ul7EEwE0wUwZWlXYqZqf1l476xWq/yzmAFWWnjGchKZBnu2Sgb8dz4VnYgEy3F+Hfp/nxbb3vxlOkPi8Syb+U/BU1h8U+THkNSgHdU9UM=";
 
     private void initWithDeviceInfo(ApiContext context) {
         context.setDeviceInfo(deviceId, deviceSecret, deviceToken);
