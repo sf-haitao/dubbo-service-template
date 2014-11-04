@@ -17,8 +17,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * Created by guankaiqiang521 on 2014/9/29.
@@ -26,6 +25,19 @@ import java.util.Properties;
 public class ApiSdkJavaGeneratorTest {
     @Test
     public void testJavaGenertor() throws ParserConfigurationException, IOException, SAXException {
+
+//        ArrayList<Integer> c = new ArrayList<Integer>(){};
+//        c.add(-370);
+//        c.add(0);
+//        c.add(Integer.MIN_VALUE);
+//        c.add(1);
+//        Collections.sort(c, new Comparator<Integer>() {
+//            @Override
+//            public int compare(Integer o, Integer o2) {
+//
+//                return o.intValue() > o2.intValue() ? 1 : o.intValue() < o2.intValue() ? -1 : 0;
+//            }
+//        });
         Properties prop = new Properties();
         prop.setProperty("net.pocrd.apiSdkJavaLocation", "/Users/rendong/workspace/service/dubbo-service-template/autotest/src/main/java/com/sfebiz/demo/client");
         prop.setProperty("net.pocrd.apiSdkJavaPkgName", "com.sfebiz.demo.client");

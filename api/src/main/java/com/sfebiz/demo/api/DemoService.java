@@ -2,10 +2,7 @@ package com.sfebiz.demo.api;
 
 import com.sfebiz.demo.entity.DemoEntity;
 import com.sfebiz.demo.entity.DemoReturnCode;
-import net.pocrd.annotation.ApiAutowired;
-import net.pocrd.annotation.ApiGroup;
-import net.pocrd.annotation.ApiParameter;
-import net.pocrd.annotation.HttpApi;
+import net.pocrd.annotation.*;
 import net.pocrd.define.CommonParameter;
 import net.pocrd.define.SecurityType;
 
@@ -22,6 +19,7 @@ public interface DemoService {
             String in);
 
     @HttpApi(name = "demo.testRegistedDevice", desc = "demo registed device", security = SecurityType.RegisteredDevice, owner = "demo")
+    @DesignedErrorCode(DemoReturnCode._C_DEMO_DEVICE_DENIED)
     public String testRegistedDevice();
 
     @HttpApi(name = "demo.testUserLogin", desc = "demo user login api", security = SecurityType.UserLogin, owner = "demo")

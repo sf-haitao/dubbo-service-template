@@ -30,6 +30,10 @@ public class Demo_TestRegistedDevice extends BaseRequest<Api_StringResp> {
      */
     public int handleError() {
         switch (response.code) {
+            // device denied
+            case ApiCode.DEMO_DEVICE_DENIED_100: {
+                break;
+            }
         }
         return response.code;
     }
