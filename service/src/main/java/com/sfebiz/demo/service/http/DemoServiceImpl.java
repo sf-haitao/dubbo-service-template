@@ -7,7 +7,9 @@ import com.sfebiz.demo.api.DemoThirdPartyService;
 import com.sfebiz.demo.dao.dto.DemoDTO;
 import com.sfebiz.demo.dao.mapper.DemoMapper;
 import com.sfebiz.demo.entity.DemoEntity;
+import net.pocrd.annotation.ApiParameter;
 import net.pocrd.define.Evaluater;
+import net.pocrd.entity.ServiceException;
 import net.pocrd.util.EvaluaterProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,7 +22,7 @@ public class DemoServiceImpl implements DemoService {
     private DemoThirdPartyService demoThirdPartyService;
 
     @Override
-    public DemoEntity sayHello(String name) {
+    public DemoEntity sayHello(String name) throws ServiceException {
         DemoEntity result = new DemoEntity();
         DemoDTO demoDTO = demoMapper.queryEntity(name);
         demoDTO.setId(demoThirdPartyService.testThirdParty(demoDTO.getId()));
@@ -29,18 +31,23 @@ public class DemoServiceImpl implements DemoService {
     }
 
     @Override
-    public DemoEntity tryError(String in) {
+    public DemoEntity tryError(String in) throws ServiceException {
         throw new RuntimeException("try error!");
     }
 
     @Override
-    public String testRegistedDevice() {
+    public String testRegistedDevice() throws ServiceException {
         return "test";
     }
 
     @Override
-    public String testUserLogin(long deviceId, long userId) {
+    public String testUserLogin(long deviceId, long userId) throws ServiceException {
         System.out.println("deviceId:" + deviceId + ", userId:" + userId);
         return "deviceId:" + deviceId + ", userId:" + userId;
+    }
+    @Override
+    public String getResByThirdPartyId(String something) {
+        System.out.println("something:" + something);
+        return something;
     }
 }

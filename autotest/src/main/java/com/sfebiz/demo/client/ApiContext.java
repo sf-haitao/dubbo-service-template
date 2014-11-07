@@ -232,7 +232,7 @@ public class ApiContext {
 
     private void signRequest(ParameterList params, int securityType) {
         if (ApiConfig.isDebug) {
-            if (securityType == SecurityType.Internal || securityType == SecurityType.Integrate) {
+            if (securityType == SecurityType.Internal || securityType == SecurityType.Integrated) {
                 return;
             }
         }
@@ -285,7 +285,7 @@ public class ApiContext {
                         if (!params.containsKey(CommonParameter.deviceToken)) {
                             params.put(CommonParameter.deviceToken, deviceToken);
                         }
-                    } else if (securityType == SecurityType.Internal || securityType == SecurityType.Integrate) {
+                    } else if (securityType == SecurityType.Internal || securityType == SecurityType.Integrated) {
                         // do nothing.
                     } else {
                         throw new LocalException(LocalException.TOKEN_MISSING);
