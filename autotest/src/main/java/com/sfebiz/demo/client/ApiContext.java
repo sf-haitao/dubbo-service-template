@@ -61,9 +61,10 @@ public class ApiContext {
         this.deviceToken = deviceToken;
     }
 
-    public void setUserInfo(long userId, String tk) {
+    public void setUserInfo(long userId, String tk, long expire) {
         this.userId = userId;
         this.userToken = tk;
+        this.userTokenExpire = expire;
     }
 
     public long getUserId() {

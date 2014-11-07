@@ -29,7 +29,7 @@ public class DemoTest {
 
     private void initWithUserInfo(ApiContext context) {
         initWithDeviceInfo(context);
-        context.setUserInfo(userId, userToken);
+        context.setUserInfo(userId, userToken, Long.MAX_VALUE);
     }
 
     @Test
@@ -62,7 +62,7 @@ public class DemoTest {
     }
 
     @Test
-    public void testRegistedDevice(){
+    public void testRegistedDevice() {
         final ApiContext context = new ApiContext("1", 123);
         initWithDeviceInfo(context);
         final Demo_TestRegistedDevice regiestedDevice = new Demo_TestRegistedDevice();
