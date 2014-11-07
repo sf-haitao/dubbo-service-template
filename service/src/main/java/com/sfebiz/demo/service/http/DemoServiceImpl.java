@@ -7,6 +7,7 @@ import com.sfebiz.demo.api.DemoThirdPartyService;
 import com.sfebiz.demo.dao.dto.DemoDTO;
 import com.sfebiz.demo.dao.mapper.DemoMapper;
 import com.sfebiz.demo.entity.DemoEntity;
+import net.pocrd.annotation.ApiParameter;
 import net.pocrd.define.Evaluater;
 import net.pocrd.entity.ServiceException;
 import net.pocrd.util.EvaluaterProvider;
@@ -43,5 +44,10 @@ public class DemoServiceImpl implements DemoService {
     public String testUserLogin(long deviceId, long userId) throws ServiceException {
         System.out.println("deviceId:" + deviceId + ", userId:" + userId);
         return "deviceId:" + deviceId + ", userId:" + userId;
+    }
+    @Override
+    public String getResByThirdPartyId(String something) {
+        System.out.println("something:" + something);
+        return something;
     }
 }
