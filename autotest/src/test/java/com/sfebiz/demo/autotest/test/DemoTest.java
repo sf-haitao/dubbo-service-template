@@ -132,9 +132,9 @@ public class DemoTest {
         String url = ApiConfig.apiUrl;
         Map<String, String> mapping = new HashMap<String, String>();
         //1.设置请求参数
-        mapping.put("_mt", "demo.getResByThirdPartyId");
-        mapping.put("_tpid", "1");
-        mapping.put("in", "abcde xxxx");
+        mapping.put("_mt", "demo.getResByThirdPartyId");//方法名
+        mapping.put("_tpid", "1");//tpid即集成第三方的编号（由网关统一分配），爬虫暂且用1
+        mapping.put("in", "abcde xxxx");//其他方法入参
         //2.进行签名
         StringBuilder sb = new StringBuilder(128);
         String[] array = mapping.keySet().toArray(new String[mapping.size()]);
@@ -147,6 +147,7 @@ public class DemoTest {
             }
         }
         System.out.println("before sig:" + sb.toString());
+        //分配给爬虫的对应公私钥对
         String pub = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCyYhw3zrUeFCmvuu82VAkFIX6NKtQPGdKAWVFYhXR9BwFeELmehdEUwcwoHECkzDN4DArsHegWx1nkv4S1+Yz3YIWc0eO2TQgQISw0moj7seqFiAwxzYko5BApabaXQJfR/veGWakEvJCk+jTrH/R6nv1V+8g71HWqnPKBbEdsyQIDAQAB";
         String pri = "MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBALJiHDfOtR4UKa+67zZUCQUhfo0q1A8Z0oBZUViFdH0HAV4QuZ6F0RTBzCgcQKTMM3gMCuwd6BbHWeS/hLX5jPdghZzR47ZNCBAhLDSaiPux6oWIDDHNiSjkEClptpdAl9H+94ZZqQS8kKT6NOsf9Hqe/VX7yDvUdaqc8oFsR2zJAgMBAAECgYBgjYw6hM8x/bXmoWczX98WAOAv5turZM20nSPTp0C7H9yUnrbp4AKgmpk3qLswuDqvos0Sqslh8vtsPmHF4dJzdfXHBHDec93O/b4QTlKr6tTEPdjwkF/JU3mgMQZsNEUdmVHfNG2owsI+0VEfHMfn09VIgs4SQjSbijIQ7Td6VQJBAPbE5m3Q1dUfuDCHuxQrRCIcH8UWTgDLwqvFtfRiD+/C6jpsrarXHUIuxgiJ1jVq1TiE0X/pNc6oUBWJZNXJow8CQQC5DlYH/R573/r2al1y6sYmgGmneHeEbOffzngzxqU+8GNAIhWN1yC2DOdiMUCmgVP34WG4WcIpWHzAkfUnSRKnAkAzizM6cumHR8XYVTGNZ/AmU8uLBjqqzeTOrlBwSF9dzE/SfkrUKXSSE2UH+YqFw9ffo1aDKjoz/VIk/XrTcPefAkEAmN/a+maEVFlH/WEJKfIBF7Vlks/WDDPbqevrKPqlcEUt+MEvhSl/AGXQkDGX8vVL5K7wB1c/KuDKzlrFZ1raaQJBAOrZPzsHcsOS91fwRyVF37vdtRUS0YTMKnFAKI0254UXKbmzbqOSwKC3hkYcu9jIzWkMk8kB2SMFqh9+xPsTNTc=";
         RsaHelper rsaHelper = new RsaHelper(pub, pri);
