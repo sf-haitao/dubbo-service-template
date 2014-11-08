@@ -35,4 +35,7 @@ public interface DemoService {
     public String getResByThirdPartyId(
             @ApiParameter(required = true, name = "in", desc = "输入参数")
             String something);
+
+    @HttpApi(name = "demo.testRedirect", desc = "test redirect", security = SecurityType.None, owner = "demo")
+    public String testRedirect();
 }

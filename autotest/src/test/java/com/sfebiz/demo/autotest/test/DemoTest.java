@@ -5,11 +5,7 @@ import com.sfebiz.demo.client.ApiConfig;
 import com.sfebiz.demo.client.ApiContext;
 import com.sfebiz.demo.client.BaseRequest;
 import com.sfebiz.demo.client.ServerResponse;
-import com.sfebiz.demo.client.api.request.ApiCode;
-import com.sfebiz.demo.client.api.request.Demo_SayHello;
-import com.sfebiz.demo.client.api.request.Demo_TestRegistedDevice;
-import com.sfebiz.demo.client.api.request.Demo_TestUserLogin;
-import com.sfebiz.demo.client.api.request.Demo_TryError;
+import com.sfebiz.demo.client.api.request.*;
 import com.sfebiz.demo.client.api.resp.Api_DEMO_DemoEntity;
 import com.sfebiz.demo.client.util.Base64Util;
 import com.sfebiz.demo.client.util.RsaHelper;
@@ -112,6 +108,22 @@ public class DemoTest {
         System.out.println(userLogin.getResponse().value);
         Assert.assertEquals(ApiCode.SUCCESS, userLogin.getReturnCode());
     }
+
+    @Test
+    public void testReirectUrl() {
+        final ApiContext context = new ApiContext("1", 123);
+        final Demo_TestRedirect req = new Demo_TestRedirect();
+        WebRequestUtil.fillResponse(url, context.getParameterString(req), String.valueOf(System.currentTimeMillis()), true,
+                new ResponseFiller() {
+                    public ServerResponse fill(InputStream is) {
+                        return context.fillResponse(req, is);
+                    }
+                }
+        );
+        System.out.println(req.getResponse().value);
+        Assert.assertEquals(ApiCode.SUCCESS, req.getReturnCode());
+    }
+
     public static final Comparator<String> StringComparator = new Comparator<String>() {
         @Override
         public int compare(String s1, String s2) {
