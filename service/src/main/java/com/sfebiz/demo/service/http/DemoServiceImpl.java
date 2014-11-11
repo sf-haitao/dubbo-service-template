@@ -47,13 +47,13 @@ public class DemoServiceImpl implements DemoService {
     }
 
     @Override
-    public String getResByThirdPartyId(String something) {
+    public String getResByThirdPartyId(String something) throws ServiceException {
         System.out.println("something:" + something);
         return something;
     }
 
     @Override
-    public String testRedirect() {
+    public String testRedirect() throws ServiceException{
         DubboExtProperty.setRedirectUrl("http://www.sfht.com");
         return null;
     }

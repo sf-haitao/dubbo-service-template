@@ -34,8 +34,8 @@ public interface DemoService {
              allowThirdPartyIds = {1})
     public String getResByThirdPartyId(
             @ApiParameter(required = true, name = "in", desc = "输入参数")
-            String something);
+            String something) throws ServiceException;
 
     @HttpApi(name = "demo.testRedirect", desc = "test redirect", security = SecurityType.None, owner = "demo")
-    public String testRedirect();
+    public String testRedirect() throws ServiceException;
 }
