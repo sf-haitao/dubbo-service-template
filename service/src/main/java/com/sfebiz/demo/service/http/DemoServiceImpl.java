@@ -7,9 +7,11 @@ import com.sfebiz.demo.api.DemoThirdPartyService;
 import com.sfebiz.demo.dao.dto.DemoDTO;
 import com.sfebiz.demo.dao.mapper.DemoMapper;
 import com.sfebiz.demo.entity.DemoEntity;
+import com.sfebiz.demo.entity.DemoReturnCode;
 import net.pocrd.define.Evaluater;
 import net.pocrd.dubboext.DubboExtProperty;
 import net.pocrd.entity.ServiceException;
+import net.pocrd.entity.ServiceRuntimeException;
 import net.pocrd.util.EvaluaterProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,12 +23,34 @@ public class DemoServiceImpl implements DemoService {
     @Autowired
     private DemoThirdPartyService demoThirdPartyService;
 
+    /**
+     * 边界异常处理
+     *
+     * @param name
+     *
+     * @return
+     *
+     * @throws ServiceException
+     */
     @Override
     public DemoEntity sayHello(String name) throws ServiceException {
-        DemoEntity result = new DemoEntity();
-        DemoDTO demoDTO = demoMapper.queryEntity(name);
-        demoDTO.setId(demoThirdPartyService.testThirdParty(demoDTO.getId()));
-        evaluater.evaluate(result, demoDTO);
+        DemoEntity result = null;
+        try {
+            result = new DemoEntity();
+            DemoDTO demoDTO = demoMapper.queryEntity(name);
+            demoDTO.setId(demoThirdPartyService.testThirdParty(demoDTO.getId()));
+            evaluater.evaluate(result, demoDTO);
+        } catch (ServiceRuntimeException sre) {
+            logger.error("api failed.", sre);
+            throw new ServiceException("api failed.", sre);
+        } catch (Throwable t) {
+            logger.error("api failed.", t);
+            if (t instanceof ServiceException) {
+                throw (ServiceException)t;
+            } else {
+                throw new ServiceException(DemoReturnCode.DEMO_UNKNOW_ERROR, "api failed.");
+            }
+        }
         return result;
     }
 
@@ -53,7 +77,7 @@ public class DemoServiceImpl implements DemoService {
     }
 
     @Override
-    public String testRedirect() throws ServiceException{
+    public String testRedirect() throws ServiceException {
         DubboExtProperty.setRedirectUrl("http://www.sfht.com");
         return null;
     }
