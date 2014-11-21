@@ -9,10 +9,10 @@ public class DemoReturnCode extends AbstractReturnCode {
     protected DemoReturnCode(String desc, int code) {
         super(desc, code);
     }
-    public final static int            _C_DEMO_UNKNOW_ERROR = 1;
-    public final static DemoReturnCode DEMO_UNKNOW_ERROR    = new DemoReturnCode("demo unkown error", _C_DEMO_UNKNOW_ERROR);
+    public final static int                _C_DEMO_UNKNOW_ERROR = 1;
+    public final static AbstractReturnCode DEMO_UNKNOW_ERROR    = new DemoReturnCode("demo unkown error", _C_DEMO_UNKNOW_ERROR);
 
-    public final static int            _C_DEMO_DEVICE_DENIED = 100;
-    public final static DemoReturnCode DEMO_DEVICE_DENIED    = new DemoReturnCode("device denied", _C_DEMO_DEVICE_DENIED);
+    public final static int                _C_DEMO_DEVICE_DENIED = 100;
+    public final static AbstractReturnCode DEMO_DEVICE_DENIED    = new DemoReturnCode("device denied", _C_DEMO_DEVICE_DENIED);
 
 }
