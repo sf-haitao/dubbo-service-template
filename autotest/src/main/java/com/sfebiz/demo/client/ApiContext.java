@@ -276,7 +276,7 @@ public class ApiContext {
                 params.put(CommonParameter.token, userToken);
             }
         } else {
-            if (((securityType & SecurityType.UserLogin) > 0) | ((securityType & SecurityType.UserTrustedDevice) > 0)) {
+            if (((securityType & SecurityType.UserLogin) != 0) | ((securityType & SecurityType.UserTrustedDevice) != 0)) {
                 throw new LocalException(LocalException.TOKEN_MISSING);
             }
             if (ApiConfig.isDebug) {
@@ -304,7 +304,7 @@ public class ApiContext {
             }
         }
 
-        if (((securityType & SecurityType.MobileOwner) > 0) | ((securityType & SecurityType.MobileOwnerTrustedDevice) > 0)) {
+        if (((securityType & SecurityType.MobileOwner) != 0) | ((securityType & SecurityType.MobileOwnerTrustedDevice) != 0)) {
             params.put(CommonParameter.phoneNumber, phoneNumber);
             params.put(CommonParameter.dynamic, dynamic);
         }

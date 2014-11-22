@@ -38,7 +38,7 @@ public class ServerResponse {
     private String data;
 
     public static boolean isNullOrEmpty(String value) {
-        return value != null & !value.isEmpty();
+        return value != null & value.length() > 0;
     }
 
     private boolean isCreditNotification(Api_KeyValuePair pair) {

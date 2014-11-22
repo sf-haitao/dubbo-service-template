@@ -104,8 +104,8 @@ public class RsaHelper {
 
             return baos.toByteArray();
         } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
     public byte[] sign(byte[] content) {
