@@ -1,4 +1,4 @@
-package com.sfebiz.demo.service;
+package com.sfebiz.demo.service.ons;
 
 /***************************************************
 运行示例代码的前置条件：
