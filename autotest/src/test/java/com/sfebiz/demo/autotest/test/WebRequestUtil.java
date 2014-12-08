@@ -1,8 +1,5 @@
 package com.sfebiz.demo.autotest.test;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 import com.sfebiz.demo.client.ServerResponse;
 import org.apache.http.Consts;
 import org.apache.http.HttpResponse;
@@ -23,15 +20,71 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.util.EntityUtils;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 @SuppressWarnings("deprecation")
 public class WebRequestUtil {
-    private static final int MAX_CONNECTION_SIZE        = 200;
-    private static final int SOCKET_TIMEOUT             = 30000;
-    private static final int CONNECTION_TIMEOUT         = 3000;
-    private static final int CONNECTION_REQUEST_TIMEOUT = 30000;
+    private static final int                 MAX_CONNECTION_SIZE        = 200;
+    private static final int                 SOCKET_TIMEOUT             = 30000;
+    private static final int                 CONNECTION_TIMEOUT         = 3000;
+    private static final int                 CONNECTION_REQUEST_TIMEOUT = 30000;
+    private static       CloseableHttpClient hc                         = null;
+    private static       RequestConfig       rc                         = null;
+    static {
+        InputStream input = WebRequestUtil.class.getResourceAsStream("/_dev_debug_config.properties");
+        if (input != null) {
+            Properties prop = new Properties();
+            try {
+                prop.load(input);
+                DebugConfig.init(prop);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
-    private static CloseableHttpClient hc = null;
-    private static RequestConfig       rc = null;
+    /**
+     * 调试配置
+     */
+    public static class DebugConfig {
+        private static DebugConfig instance = new DebugConfig();
+        private DebugConfig() {
+        }
+        public static DebugConfig getInstance() {
+            return instance;
+        }
+        public static final void init(Properties properties) {
+            synchronized (DebugConfig.class) {
+                if (instance == null) {
+                    instance = new DebugConfig();
+                }
+                if (properties != null) {
+                    instance.setDebugDubboVersion(properties.getProperty("debug.dubbo.version"));
+                }
+            }
+        }
+
+        private String debugDubboVersion;
+
+        public String getDebugDubboVersion() {
+            return debugDubboVersion;
+        }
+        void setDebugDubboVersion(String debugDubboVersion) {
+            if (debugDubboVersion != null && debugDubboVersion.length() != 0) {
+                this.debugDubboVersion = debugDubboVersion;
+                System.out.println("debug.dubbo.version:" + debugDubboVersion);
+            }
+        }
+    }
+
+    private static void setDebugDubboVersion(HttpRequestBase requestBase) {
+        String debugVersion = DebugConfig.getInstance().getDebugDubboVersion();
+        if (debugVersion != null && debugVersion.length() != 0) {
+            requestBase.setHeader("DUBBO-VERSION", debugVersion);
+        }
+    }
 
     synchronized private static CloseableHttpClient getHttpClient() {
         if (hc == null) {
@@ -119,6 +172,7 @@ public class WebRequestUtil {
             System.out.println("Get请求:" + baseUrl + "?" + params);
             req = new HttpGet(baseUrl + "?" + params);
         }
+        setDebugDubboVersion(req);
         req.setConfig(rc);
         if (useGzip) {
             req.setHeader("Accept-Encoding", "gzip");
