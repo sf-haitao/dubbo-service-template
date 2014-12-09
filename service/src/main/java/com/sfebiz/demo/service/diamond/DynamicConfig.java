@@ -11,31 +11,29 @@ import java.util.concurrent.Executor;
  * Since: 14/11/26 下午11:56
  */
 public class DynamicConfig {
-
     public static void main(String[] args) {
-
-        //实时监听配置的修改
-        ManagerListener managerListener = new ManagerListener() {
-
-            @Override
-            public Executor getExecutor() {
-                return null;
-            }
-
-            @Override
-            public void receiveConfigInfo(String configInfo) {
-
-                if (null != configInfo && !configInfo.equals("")) {
-                    System.out.println("configInfo:" + configInfo);
-                }
-            }
-        };
-
-        DefaultDiamondManager defaultDiamondManager = new DefaultDiamondManager("DEFAULT_GROUP", "com.sfebiz.diamond.test", managerListener);
-
-        System.out.println("configInfo: " + defaultDiamondManager.getAvailableConfigureInfomation(5000));
-
+        ManagerListener testManagerListener = new TestDiamond();
+        DefaultDiamondManager defaultDiamondManager = new DefaultDiamondManager("com.sfebiz.diamond.test", testManagerListener);
+        String configInfo = defaultDiamondManager.getAvailableConfigureInfomation(1000);
+        parseConfigInfo(configInfo);
 
     }
+    static class TestDiamond implements ManagerListener {
 
+        @Override
+        public Executor getExecutor() {
+            return null;
+        }
+
+        @Override
+        public void receiveConfigInfo(String configInfo) {
+            parseConfigInfo(configInfo);
+        }
+    }
+    public static void parseConfigInfo(String configInfo) {
+
+        if (null != configInfo && !(configInfo.trim()).equals("")) {
+            System.out.println(configInfo);
+        }
+    }
 }
