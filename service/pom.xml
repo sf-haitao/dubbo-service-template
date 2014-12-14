@@ -111,6 +111,11 @@
             <artifactId>spymemcached</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+        </dependency>
+
     </dependencies>
     <build>
         <finalName>demo-service</finalName>
