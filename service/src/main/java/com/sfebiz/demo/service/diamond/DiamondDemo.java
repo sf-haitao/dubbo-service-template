@@ -16,14 +16,14 @@ import java.util.concurrent.Executor;
  * Version: 1.0.0
  * Since: 14/11/26 下午11:56
  */
-public class DynamicConfig {
+public class DiamondDemo {
 
     private String xxxConfig;
     private Integer yyyConfig;
 
-    private final static Logger logger = LoggerFactory.getLogger(DynamicConfig.class);
+    private final static Logger logger = LoggerFactory.getLogger(DiamondDemo.class);
 
-    private static final DynamicConfig dynamicConfig = new DynamicConfig();
+    private static final DiamondDemo dynamicConfig = new DiamondDemo();
 
     private ManagerListener dynamicConfigListener = new ManagerListener() {
         public void receiveConfigInfo(String configInfo) {
@@ -49,11 +49,11 @@ public class DynamicConfig {
         BeanUtils.copyProperties(this, properties);
     }
 
-    public static DynamicConfig getInstance() {
+    public static DiamondDemo getInstance() {
         return dynamicConfig;
     }
 
-    private DynamicConfig() {
+    private DiamondDemo() {
         String groupId = "DEFAULT_GROUP";
         String dataId = "com.sfebiz.diamond.test";
         DefaultDiamondManager defaultDiamondManager = new DefaultDiamondManager(groupId, dataId, dynamicConfigListener);
@@ -78,8 +78,8 @@ public class DynamicConfig {
     }
 
     public static void main(String[] args) {
-        System.out.println("xxxConfig: " + DynamicConfig.getInstance().getXxxConfig());
-        System.out.println("yyyConfig: " + DynamicConfig.getInstance().getYyyConfig());
+        System.out.println("xxxConfig: " + DiamondDemo.getInstance().getXxxConfig());
+        System.out.println("yyyConfig: " + DiamondDemo.getInstance().getYyyConfig());
     }
 
 }

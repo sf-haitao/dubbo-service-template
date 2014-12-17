@@ -324,7 +324,7 @@
             <dependency>
                 <groupId>com.aliyun.openservices</groupId>
                 <artifactId>ons-client</artifactId>
-                <version>1.1.1</version>
+                <version>1.1.4</version>
             </dependency>
 
             <dependency>
@@ -343,6 +343,18 @@
                 <groupId>commons-beanutils</groupId>
                 <artifactId>commons-beanutils</artifactId>
                 <version>1.9.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.aliyun.openservices</groupId>
+                <artifactId>aliyun-openservices-sls-v0.3</artifactId>
+                <version>0.1.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.aliyun.openservices</groupId>
+                <artifactId>aliyun-openservices</artifactId>
+                <version>OTS-2.0.4</version>
             </dependency>
 
         </dependencies>

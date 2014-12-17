@@ -116,6 +116,16 @@
             <artifactId>commons-beanutils</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.aliyun.openservices</groupId>
+            <artifactId>aliyun-openservices-sls-v0.3</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.aliyun.openservices</groupId>
+            <artifactId>aliyun-openservices</artifactId>
+        </dependency>
+
     </dependencies>
     <build>
         <finalName>demo-service</finalName>
