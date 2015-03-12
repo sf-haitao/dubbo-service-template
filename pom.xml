@@ -52,7 +52,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <parent_version>1.0.0</parent_version>
 
-        <api-util_version>1.0.0-SNAPSHOT</api-util_version>
+        <api-util_version>1.1.0-SNAPSHOT</api-util_version>
         <!-- dependency versions -->
         <!-- 2nd party libs-->
         <demo_version>0.1.0-SNAPSHOT</demo_version>
