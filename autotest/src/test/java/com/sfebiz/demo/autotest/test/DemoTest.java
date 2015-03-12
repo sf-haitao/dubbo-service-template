@@ -155,7 +155,7 @@ public class DemoTest {
         }
         System.out.println("before sig:" + sb.toString());
         //3.构造签名
-        String md5Key = "abcdefg";
+        String md5Key = "2173c94dfb4ef2da8402f2f0c490995d";
         String sig = Md5Util.computeToHex(sb.append(md5Key).toString().getBytes("utf-8"));
         mapping.put("_sig", sig);
         System.out.println("sig:" + sig);
@@ -163,7 +163,7 @@ public class DemoTest {
         for (Entry<String, String> entry : mapping.entrySet()) {
             req.append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), "utf-8")).append("&");//进行url encoding
         }
-        System.out.println("http://127.0.0.1:8080/m.api?" + req.toString());
+        System.out.println("http://115.28.145.123//m.api?" + req.toString());
     }
     @Test
     public void testIntegratedWithRSA() throws UnsupportedEncodingException {
