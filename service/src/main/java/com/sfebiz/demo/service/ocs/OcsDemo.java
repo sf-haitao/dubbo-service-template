@@ -11,7 +11,7 @@ import net.spy.memcached.auth.PlainCallbackHandler;
  * Version: 1.0.0
  * Since: 14/12/8 下午3:34
  */
-public class OcsClient {
+public class OcsDemo {
 
     public static void main(String[] args) throws Exception{
 

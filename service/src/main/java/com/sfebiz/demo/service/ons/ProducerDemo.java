@@ -22,7 +22,7 @@ import com.aliyun.openservices.ons.api.PropertyKeyConst;
 import com.aliyun.openservices.ons.api.SendResult;
 
 
-public class ProducerClient {
+public class ProducerDemo {
 
     public static void main(String[] args) {
        Properties properties = new Properties();

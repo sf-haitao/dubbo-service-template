@@ -29,7 +29,7 @@ import com.aliyun.openservices.ons.api.ONSFactory;
 import com.aliyun.openservices.ons.api.PropertyKeyConst;
 
 
-public class ConsumerClient {
+public class ConsumerDemo {
 
     public static void main(String[] args) {
         Properties properties = new Properties();
