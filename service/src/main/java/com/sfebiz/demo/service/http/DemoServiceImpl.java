@@ -1,7 +1,5 @@
 package com.sfebiz.demo.service.http;
 
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.sfebiz.demo.api.DemoService;
 import com.sfebiz.demo.api.DemoThirdPartyService;
 import com.sfebiz.demo.dao.dto.DemoDTO;
@@ -13,13 +11,15 @@ import net.pocrd.dubboext.DubboExtProperty;
 import net.pocrd.entity.ServiceException;
 import net.pocrd.entity.ServiceRuntimeException;
 import net.pocrd.util.EvaluaterProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class DemoServiceImpl implements DemoService {
-    private static final Logger    logger    = LoggerFactory.getLogger(DemoServiceImpl.class);
+    private static final Logger logger    = LoggerFactory.getLogger(DemoServiceImpl.class);
     private static final Evaluater evaluater = EvaluaterProvider.getEvaluater(DemoEntity.class, DemoDTO.class);
-    //    @Autowired
-    //    private DemoMapper            demoMapper;
+    @Autowired
+    private DemoMapper            demoMapper;
     @Autowired
     private DemoThirdPartyService demoThirdPartyService;
 
@@ -35,22 +35,22 @@ public class DemoServiceImpl implements DemoService {
     @Override
     public DemoEntity sayHello(String name) throws ServiceException {
         DemoEntity result = null;
-        //        try {
-        //            result = new DemoEntity();
-        //            DemoDTO demoDTO = demoMapper.queryEntity(name);
-        //            demoDTO.setId(demoThirdPartyService.testThirdParty(demoDTO.getId()));
-        //            evaluater.evaluate(result, demoDTO);
-        //        } catch (ServiceRuntimeException sre) {
-        //            logger.error("api failed.", sre);
-        //            throw new ServiceException("api failed.", sre);
-        //        } catch (Throwable t) {
-        //            logger.error("api failed.", t);
-        //            if (t instanceof ServiceException) {
-        //                throw (ServiceException)t;
-        //            } else {
-        //                throw new ServiceException(DemoReturnCode.DEMO_UNKNOW_ERROR, "api failed.");
-        //            }
-        //        }
+        try {
+            result = new DemoEntity();
+            DemoDTO demoDTO = demoMapper.queryEntity(name);
+            demoDTO.setId(demoThirdPartyService.testThirdParty(demoDTO.getId()));
+            evaluater.evaluate(result, demoDTO);
+        } catch (ServiceRuntimeException sre) {
+            logger.error("api failed.", sre);
+            throw new ServiceException("api failed.", sre);
+        } catch (Throwable t) {
+            logger.error("api failed.", t);
+            if (t instanceof ServiceException) {
+                throw (ServiceException)t;
+            } else {
+                throw new ServiceException(DemoReturnCode.DEMO_UNKNOW_ERROR, "api failed.");
+            }
+        }
         return result;
     }
 

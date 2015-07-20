@@ -32,59 +32,6 @@ public class WebRequestUtil {
     private static final int                 CONNECTION_REQUEST_TIMEOUT = 30000;
     private static       CloseableHttpClient hc                         = null;
     private static       RequestConfig       rc                         = null;
-    static {
-        InputStream input = WebRequestUtil.class.getResourceAsStream("/_dev_debug_config.properties");
-        if (input != null) {
-            Properties prop = new Properties();
-            try {
-                prop.load(input);
-                DebugConfig.init(prop);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * 调试配置
-     */
-    public static class DebugConfig {
-        private static DebugConfig instance = new DebugConfig();
-        private DebugConfig() {
-        }
-        public static DebugConfig getInstance() {
-            return instance;
-        }
-        public static final void init(Properties properties) {
-            synchronized (DebugConfig.class) {
-                if (instance == null) {
-                    instance = new DebugConfig();
-                }
-                if (properties != null) {
-                    instance.setDebugDubboVersion(properties.getProperty("debug.dubbo.version"));
-                }
-            }
-        }
-
-        private String debugDubboVersion;
-
-        public String getDebugDubboVersion() {
-            return debugDubboVersion;
-        }
-        void setDebugDubboVersion(String debugDubboVersion) {
-            if (debugDubboVersion != null && debugDubboVersion.length() != 0) {
-                this.debugDubboVersion = debugDubboVersion;
-                System.out.println("debug.dubbo.version:" + debugDubboVersion);
-            }
-        }
-    }
-
-    private static void setDebugDubboVersion(HttpRequestBase requestBase) {
-        String debugVersion = DebugConfig.getInstance().getDebugDubboVersion();
-        if (debugVersion != null && debugVersion.length() != 0) {
-            requestBase.setHeader("DUBBO-VERSION", debugVersion);
-        }
-    }
 
     synchronized private static CloseableHttpClient getHttpClient() {
         if (hc == null) {
@@ -152,11 +99,12 @@ public class WebRequestUtil {
                 }
             }
         }
+
         return serverResponse;
     }
 
     private static CloseableHttpResponse getHttpResponse(String baseUrl, String params, String cid,
-                                                         boolean useGzip) throws ClientProtocolException, IOException {
+            boolean useGzip) throws ClientProtocolException, IOException {
         CloseableHttpClient client = getHttpClient();
         HttpRequestBase req = null;
         if (params == null) {
@@ -172,7 +120,14 @@ public class WebRequestUtil {
             System.out.println("Get请求:" + baseUrl + "?" + params);
             req = new HttpGet(baseUrl + "?" + params);
         }
-        setDebugDubboVersion(req);
+        String dubboVersion = System.getProperty("debug.dubbo.version");
+        if(dubboVersion != null && dubboVersion.length() > 0) {
+            req.setHeader("DUBBO-VERSION", dubboVersion);
+        }
+        String dubboUrl = System.getProperty("debug.dubbo.url");
+        if(dubboUrl != null && dubboUrl.length() > 0) {
+            req.setHeader("DUBBO-SERVICE-URL", dubboUrl);
+        }
         req.setConfig(rc);
         if (useGzip) {
             req.setHeader("Accept-Encoding", "gzip");
@@ -183,6 +138,7 @@ public class WebRequestUtil {
         if (statusCode != HttpStatus.SC_OK) {
             throw new RuntimeException(cid + ",0 " + baseUrl + "?" + params + " code:" + statusCode);
         }
+
         return resp;
     }
 

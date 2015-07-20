@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config description="sfht.config">
+	<group name="sfht.demo.config.setting">
+		<property name="sfht.demo.db.url"  description="Demo数据库地址" required="true"/>
+		<property name="sfht.demo.db.username"  description="Demo数据库用户名" required="true"/>
+		<property name="sfht.demo.db.password"  description="Demo数据库密码" required="true"/>
+		
+		<property name="sfht.demo.log.home"  description="Demo日志文件根目录" required="true"/>
+		
+		<property name="sfht.dubbo.registry.url"  description="Dubbo注册中心地址" required="true"/>
+		<property name="sfht.demo.dubbo.export.timeout" defaultValue="3000" description="Dubbo服务超时时间" required="true"/>
+		<property name="sfht.demo.dubbo.reference.version"  description="Dubbo服务引用版本号" required="true"/>
+	</group>
+
+	<script>
+		<generate template="config.properties.vm" destfile="config.properties" charset="UTF-8" /> 
+	</script>
+</config>

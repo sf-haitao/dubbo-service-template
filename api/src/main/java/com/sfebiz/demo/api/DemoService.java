@@ -31,7 +31,7 @@ public interface DemoService {
             long userId) throws ServiceException;
 
     @HttpApi(name = "demo.getResByThirdPartyId", desc = "demo getResByThirdPartyId", security = SecurityType.Integrated, owner = "demo",
-            needVerify = true)
+             allowThirdPartyIds = {1})
     public String getResByThirdPartyId(
             @ApiParameter(required = true, name = "in", desc = "输入参数")
             String something) throws ServiceException;

@@ -1,0 +1,7 @@
+com.sfebiz.demo.datasource.url=${sfht.demo.db.url}
+com.sfebiz.demo.datasource.username=${sfht.demo.db.username}
+com.sfebiz.demo.datasource.password=${sfht.demo.db.password}
+com.sfebiz.demo.log.home=${sfht.demo.log.home}
+dubbo.registry.url=${sfht.dubbo.registry.url}
+dubbo.export.timeout=${sfht.demo.dubbo.export.timeout}
+dubbo.reference.version=${sfht.demo.dubbo.reference.version}
