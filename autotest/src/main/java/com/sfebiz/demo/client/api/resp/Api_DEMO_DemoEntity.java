@@ -30,7 +30,7 @@ public class Api_DEMO_DemoEntity {
      * 反序列化函数，用于从json节点对象反序列化本类型实例
      */
     public static Api_DEMO_DemoEntity deserialize(JSONObject json) throws JSONException {
-        if (json != null && json != JSONObject.NULL && json.length() > 0) {
+        if (json != null && json.length() > 0) {
             Api_DEMO_DemoEntity result = new Api_DEMO_DemoEntity();
             
             // id

@@ -22,7 +22,7 @@ public class Api_MessageNotification {
     public int type;
       
     /**
-     * 1:文本消息，2:语音消息，3:图片消息，4:视频消息，10001 用户排队位置发生变更 或者医生排队人数变更,10002 医生引导用户退出就诊, 10003向用户发起转诊, 10004用户同意转诊, 10005专家把用户拉入诊室, 10006用户同意结束问诊, 10007用户拒绝结束问诊, 10008引导用户输入姓名, 10009引导用户输入年龄, 10010引导用户输入性别, 10015医生将用户拉进聊天室 自动返回欢迎语, 10018点评完成（选择好、中、差）, 10019转诊医生不在线消息, 11001活动消息 ,11002 习惯消息
+     * 消息内容类型
      */
     public int subType;
       
@@ -50,7 +50,7 @@ public class Api_MessageNotification {
      * 反序列化函数，用于从json节点对象反序列化本类型实例
      */
     public static Api_MessageNotification deserialize(JSONObject json) throws JSONException {
-        if (json != null && json != JSONObject.NULL && json.length() > 0) {
+        if (json != null && json.length() > 0) {
             Api_MessageNotification result = new Api_MessageNotification();
             
             // 消息内容
@@ -65,7 +65,7 @@ public class Api_MessageNotification {
               }
             // 消息类型0: 系统消息,1:通知消息,2: 聊天消息,3:群消息,4:留言消息,5:普通聊天 控制消息
             result.type = json.optInt("type");
-            // 1:文本消息，2:语音消息，3:图片消息，4:视频消息，10001 用户排队位置发生变更 或者医生排队人数变更,10002 医生引导用户退出就诊, 10003向用户发起转诊, 10004用户同意转诊, 10005专家把用户拉入诊室, 10006用户同意结束问诊, 10007用户拒绝结束问诊, 10008引导用户输入姓名, 10009引导用户输入年龄, 10010引导用户输入性别, 10015医生将用户拉进聊天室 自动返回欢迎语, 10018点评完成（选择好、中、差）, 10019转诊医生不在线消息, 11001活动消息 ,11002 习惯消息
+            // 消息内容类型
             result.subType = json.optInt("subType");
             // 发送方Id
             result.fromUserId = json.optLong("fromUserId");
@@ -91,7 +91,7 @@ public class Api_MessageNotification {
         // 消息类型0: 系统消息,1:通知消息,2: 聊天消息,3:群消息,4:留言消息,5:普通聊天 控制消息
         json.put("type", this.type);
           
-        // 1:文本消息，2:语音消息，3:图片消息，4:视频消息，10001 用户排队位置发生变更 或者医生排队人数变更,10002 医生引导用户退出就诊, 10003向用户发起转诊, 10004用户同意转诊, 10005专家把用户拉入诊室, 10006用户同意结束问诊, 10007用户拒绝结束问诊, 10008引导用户输入姓名, 10009引导用户输入年龄, 10010引导用户输入性别, 10015医生将用户拉进聊天室 自动返回欢迎语, 10018点评完成（选择好、中、差）, 10019转诊医生不在线消息, 11001活动消息 ,11002 习惯消息
+        // 消息内容类型
         json.put("subType", this.subType);
           
         // 发送方Id

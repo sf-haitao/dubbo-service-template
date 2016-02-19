@@ -8,6 +8,8 @@ public class ApiCode {
     
     /** 未分配返回值 服务端: */
     public static final int NO_ASSIGN = -2147483648;
+    /** 上传文件名错误 服务端: */
+    public static final int UPLOAD_FILE_NAME_ERROR = -390;
     /** 上传文件过大 服务端: */
     public static final int UPLOAD_FILE_TOO_LARGE = -380;
     /** 用户被锁定 服务端: */

@@ -42,6 +42,11 @@ public final class CommonParameter {
     public static final String callId = "_cid";
 
     /**
+     * business id 业务流水号，用于做幂等判断，风控等
+     */
+    public static final String businessId = "_bid";
+
+    /**
      * device id 设备标示符
      */
     public static final String deviceId = "_did";

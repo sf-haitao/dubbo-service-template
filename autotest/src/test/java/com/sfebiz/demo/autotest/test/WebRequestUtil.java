@@ -104,7 +104,7 @@ public class WebRequestUtil {
     }
 
     private static CloseableHttpResponse getHttpResponse(String baseUrl, String params, String cid,
-            boolean useGzip) throws ClientProtocolException, IOException {
+            boolean useGzip) throws IOException {
         CloseableHttpClient client = getHttpClient();
         HttpRequestBase req = null;
         if (params == null) {

@@ -52,7 +52,7 @@ public class Api_Response {
      * 反序列化函数，用于从json节点对象反序列化本类型实例
      */
     public static Api_Response deserialize(JSONObject json) throws JSONException {
-        if (json != null && json != JSONObject.NULL && json.length() > 0) {
+        if (json != null && json.length() > 0) {
             Api_Response result = new Api_Response();
             
             // 当前服务端时间
@@ -76,7 +76,7 @@ public class Api_Response {
                 result.stateList = new ArrayList<Api_CallState>(len);
                 for (int i = 0; i < len; i++) {
                         JSONObject jo = stateListArray.optJSONObject(i);
-                    if (jo != null && jo != JSONObject.NULL && jo.length() > 0) {
+                    if (jo != null && jo.length() > 0) {
                         result.stateList.add(Api_CallState.deserialize(jo));
                     }
                 }
@@ -89,7 +89,7 @@ public class Api_Response {
                 result.notificationList = new ArrayList<Api_KeyValuePair>(len);
                 for (int i = 0; i < len; i++) {
                         JSONObject jo = notificationListArray.optJSONObject(i);
-                    if (jo != null && jo != JSONObject.NULL && jo.length() > 0) {
+                    if (jo != null && jo.length() > 0) {
                         result.notificationList.add(Api_KeyValuePair.deserialize(jo));
                     }
                 }
@@ -121,9 +121,8 @@ public class Api_Response {
         // API调用状态，code的信息请参考ApiCode定义文件 
         if (this.stateList != null) {
             JSONArray stateListArray = new JSONArray();
-            for (Api_CallState value : this.stateList)
-            {
-                if (stateList != null) {
+            for (Api_CallState value : this.stateList) {
+                if (value != null) {
                     stateListArray.put(value.serialize());
                 }
             }
@@ -133,9 +132,8 @@ public class Api_Response {
         // 服务端返回的通知事件集合 
         if (this.notificationList != null) {
             JSONArray notificationListArray = new JSONArray();
-            for (Api_KeyValuePair value : this.notificationList)
-            {
-                if (notificationList != null) {
+            for (Api_KeyValuePair value : this.notificationList) {
+                if (value != null) {
                     notificationListArray.put(value.serialize());
                 }
             }

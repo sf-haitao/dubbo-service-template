@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author guankaiqiang@jk.cn
+ * @author guankaiqiang@ifunq.com
  *         返回结果中通用部分
  */
 public class ServerResponse {

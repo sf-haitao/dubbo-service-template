@@ -47,6 +47,10 @@ public abstract class BaseRequest<T> {
         params.put(name, value);
     }
 
+    public final void setBusinessId(String businessId) {
+        params.put(CommonParameter.businessId, businessId);
+    }
+
     /**
      * 用于记录访问日志
      *

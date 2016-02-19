@@ -6,8 +6,10 @@ import com.sfebiz.demo.dao.dto.DemoDTO;
 import com.sfebiz.demo.dao.mapper.DemoMapper;
 import com.sfebiz.demo.entity.DemoEntity;
 import com.sfebiz.demo.entity.DemoReturnCode;
+import net.pocrd.annotation.ApiParameter;
 import net.pocrd.define.Evaluater;
 import net.pocrd.dubboext.DubboExtProperty;
+import net.pocrd.entity.ApiReturnCode;
 import net.pocrd.entity.ServiceException;
 import net.pocrd.entity.ServiceRuntimeException;
 import net.pocrd.util.EvaluaterProvider;
@@ -16,7 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class DemoServiceImpl implements DemoService {
-    private static final Logger logger    = LoggerFactory.getLogger(DemoServiceImpl.class);
+    private static final Logger    logger    = LoggerFactory.getLogger(DemoServiceImpl.class);
     private static final Evaluater evaluater = EvaluaterProvider.getEvaluater(DemoEntity.class, DemoDTO.class);
     @Autowired
     private DemoMapper            demoMapper;
@@ -27,9 +29,7 @@ public class DemoServiceImpl implements DemoService {
      * 边界异常处理
      *
      * @param name
-     *
      * @return
-     *
      * @throws ServiceException
      */
     @Override
@@ -55,13 +55,23 @@ public class DemoServiceImpl implements DemoService {
     }
 
     @Override
+    public DemoEntity testMock(String name) throws ServiceException {
+        return null;
+    }
+
+    @Override
+    public DemoEntity testShortCircuit(String name) throws ServiceException {
+        return null;
+    }
+
+    @Override
     public DemoEntity tryError(String in) throws ServiceException {
-        throw new RuntimeException("try error!");
+        throw new ServiceException(ApiReturnCode.API_UPGRADE, "try error!");
     }
 
     @Override
     public String testRegistedDevice() throws ServiceException {
-        return "test";
+        return "testRegistedDevice";
     }
 
     @Override
@@ -79,6 +89,17 @@ public class DemoServiceImpl implements DemoService {
     @Override
     public String testRedirect() throws ServiceException {
         DubboExtProperty.setRedirectUrl("http://www.sfht.com");
+        return "testRedirect";
+    }
+
+    @Override
+    public String testIgnoreParameterForSecurity(String something) throws ServiceException {
+        System.out.println("something:" + something);
+        try {
+            Thread.sleep(300);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 }

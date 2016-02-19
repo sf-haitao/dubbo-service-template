@@ -25,7 +25,7 @@ public class Api_StringResp {
      * 反序列化函数，用于从json节点对象反序列化本类型实例
      */
     public static Api_StringResp deserialize(JSONObject json) throws JSONException {
-        if (json != null && json != JSONObject.NULL && json.length() > 0) {
+        if (json != null && json.length() > 0) {
             Api_StringResp result = new Api_StringResp();
             
             // 字符串返回值

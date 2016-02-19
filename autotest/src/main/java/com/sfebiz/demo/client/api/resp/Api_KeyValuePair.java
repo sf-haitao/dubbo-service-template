@@ -30,7 +30,7 @@ public class Api_KeyValuePair {
      * 反序列化函数，用于从json节点对象反序列化本类型实例
      */
     public static Api_KeyValuePair deserialize(JSONObject json) throws JSONException {
-        if (json != null && json != JSONObject.NULL && json.length() > 0) {
+        if (json != null && json.length() > 0) {
             Api_KeyValuePair result = new Api_KeyValuePair();
             
             // 键

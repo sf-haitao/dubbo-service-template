@@ -10,15 +10,11 @@ import com.sfebiz.demo.client.api.resp.Api_DEMO_DemoEntity;
 import com.sfebiz.demo.client.util.Base64Util;
 import com.sfebiz.demo.client.util.RsaHelper;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
-import java.io.Writer;
 import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -35,7 +31,7 @@ public class DemoTest {
     private static final String deviceSecret = "581bb3c7f2d09e4d2f07f69706fff13f261f4cfa2038cd2ab7bb46040ca2d568";
     private static final String deviceToken  = "jxpvuVNWcYb75UlLHC3QyptGUwn0V+LDzdi/GMTLcmGN1rmpX80ze7hRE8peb0dbjfUWi52dEoaZy6YCJZcF9L4f+2gJXMjncRCFhGY3AHo=";
     private static final long   userId       = 22L;
-    private static final String userToken    = "F3Ul7EEwE0wUwZWlXYqZqf1l476xWq/yzmAFWWnjGchKZBnu2Sgb8dz4VnYgEy3F+Hfp/nxbb3vxlOkPi8Syb+U/BU1h8U+THkNSgHdU9UM=";
+    private static final String userToken    = "A/vUrHrdp/9Qs1SejYBFY/q/e6XGIWTAJzH0uWXNvrMsLPIMOkjxAVyODDeu+JLA3pm/ASMcOcnvlRTk8APu1xAWxMc019l2ijGJ+CLyaFs=";
 
     private void initWithDeviceInfo(ApiContext context) {
         context.setDeviceInfo(deviceId, deviceSecret, deviceToken);
@@ -46,17 +42,24 @@ public class DemoTest {
         context.setUserInfo(userId, userToken, Long.MAX_VALUE);
     }
 
+    @BeforeClass
+    public static void init() {
+        System.setProperty("debug.dubbo.url", "dubbo://10.32.177.88:20880/");
+        //        System.setProperty("debug.dubbo.url", "dubbo://127.0.0.1:20880/");
+        System.setProperty("debug.dubbo.version", "LATEST");
+    }
+
     @Test
     public void sayHelloTest() {
         final ApiContext context = new ApiContext("1", 123);
         final Demo_SayHello sayHello = new Demo_SayHello("abc");
         WebRequestUtil.fillResponse(url, context.getParameterString(sayHello), String.valueOf(System.currentTimeMillis()), true,
-                                    new ResponseFiller() {
-                                        public ServerResponse fill(InputStream is) {
-                                            return context.fillResponse(sayHello, is);
-                                        }
-                                    }
-                                   );
+                new ResponseFiller() {
+                    public ServerResponse fill(InputStream is) {
+                        return context.fillResponse(sayHello, is);
+                    }
+                }
+        );
         Api_DEMO_DemoEntity resp = sayHello.getResponse();
         Assert.assertEquals(ApiCode.SUCCESS, sayHello.getReturnCode());
         Assert.assertEquals(resp.id, 1);
@@ -68,13 +71,13 @@ public class DemoTest {
         final ApiContext context = new ApiContext("1", 123);
         final Demo_TryError tryError = new Demo_TryError("abc");
         WebRequestUtil.fillResponse(url, context.getParameterString(tryError), String.valueOf(System.currentTimeMillis()), true,
-                                    new ResponseFiller() {
-                                        public ServerResponse fill(InputStream is) {
-                                            return context.fillResponse(tryError, is);
-                                        }
-                                    }
-                                   );
-        Assert.assertEquals(-100, tryError.getReturnCode());
+                new ResponseFiller() {
+                    public ServerResponse fill(InputStream is) {
+                        return context.fillResponse(tryError, is);
+                    }
+                }
+        );
+        Assert.assertEquals(-220, tryError.getReturnCode());
     }
 
     @Test
@@ -83,12 +86,12 @@ public class DemoTest {
         initWithDeviceInfo(context);
         final Demo_TestRegistedDevice regiestedDevice = new Demo_TestRegistedDevice();
         WebRequestUtil.fillResponse(url, context.getParameterString(regiestedDevice), String.valueOf(System.currentTimeMillis()), true,
-                                    new ResponseFiller() {
-                                        public ServerResponse fill(InputStream is) {
-                                            return context.fillResponse(regiestedDevice, is);
-                                        }
-                                    }
-                                   );
+                new ResponseFiller() {
+                    public ServerResponse fill(InputStream is) {
+                        return context.fillResponse(regiestedDevice, is);
+                    }
+                }
+        );
         Assert.assertEquals(ApiCode.SUCCESS, regiestedDevice.getReturnCode());
     }
 
@@ -97,31 +100,38 @@ public class DemoTest {
         final ApiContext context = new ApiContext("1", 123);
         initWithUserInfo(context);
         Demo_TestUserLogin userLogin = new Demo_TestUserLogin();
-        final BaseRequest[] requests = new BaseRequest[]{userLogin};
+        final BaseRequest[] requests = new BaseRequest[] { userLogin };
         WebRequestUtil.fillResponse(url, context.getParameterString(requests), String.valueOf(System.currentTimeMillis()), true,
-                                    new ResponseFiller() {
-                                        public ServerResponse fill(InputStream is) {
-                                            return context.fillResponse(requests, is);
-                                        }
-                                    }
-                                   );
-        System.out.println(userLogin.getResponse().value);
+                new ResponseFiller() {
+                    public ServerResponse fill(InputStream is) {
+                        return context.fillResponse(requests, is);
+                    }
+                }
+        );
         Assert.assertEquals(ApiCode.SUCCESS, userLogin.getReturnCode());
+        System.out.println(userLogin.getResponse().value);
     }
 
     @Test
     public void testReirectUrl() {
         final ApiContext context = new ApiContext("1", 123);
         final Demo_TestRedirect req = new Demo_TestRedirect();
-        WebRequestUtil.fillResponse(url, context.getParameterString(req), String.valueOf(System.currentTimeMillis()), true,
-                new ResponseFiller() {
-                    public ServerResponse fill(InputStream is) {
-                        return context.fillResponse(req, is);
+        String msg = null;
+        try {
+            WebRequestUtil.fillResponse(url, context.getParameterString(req), String.valueOf(System.currentTimeMillis()), true,
+                    new ResponseFiller() {
+                        public ServerResponse fill(InputStream is) {
+                            return context.fillResponse(req, is);
+                        }
                     }
-                }
-        );
-        System.out.println(req.getResponse().value);
-        Assert.assertEquals(ApiCode.SUCCESS, req.getReturnCode());
+            );
+        } catch (Exception e) {
+            if (e.getCause() != null) {
+                msg = e.getCause().getMessage();
+                System.out.println(msg);
+            }
+        }
+        Assert.assertTrue(msg != null && msg.endsWith("302"));
     }
 
     public static final Comparator<String> StringComparator = new Comparator<String>() {
@@ -139,6 +149,7 @@ public class DemoTest {
             return n1 - n2;
         }
     };
+
     @Test
     public void testIntegrated() throws UnsupportedEncodingException {
         String url = ApiConfig.apiUrl;
@@ -172,5 +183,76 @@ public class DemoTest {
             req.append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), "utf-8")).append("&");//进行url encoding
         }
         System.out.println("http://127.0.0.1:8080/m.api?" + req.toString());
+    }
+
+    @Test
+    public void testMockObject() {
+        final ApiContext context = new ApiContext("1", 123);
+        final Demo_TestMock testMock = new Demo_TestMock("NAME");
+        WebRequestUtil.fillResponse(url, context.getParameterString(testMock), String.valueOf(System.currentTimeMillis()), true,
+                new ResponseFiller() {
+                    public ServerResponse fill(InputStream is) {
+                        return context.fillResponse(testMock, is);
+                    }
+                }
+        );
+        Api_DEMO_DemoEntity resp = testMock.getResponse();
+        Assert.assertEquals(ApiCode.SUCCESS, testMock.getReturnCode());
+        Assert.assertEquals(resp.id, 1234567);
+        Assert.assertEquals(resp.name, "mock test");
+    }
+
+    @Test
+    public void testShortCircuit() {
+        final ApiContext context = new ApiContext("1", 123);
+        final Demo_TestShortCircuit testMock = new Demo_TestShortCircuit("NAME");
+        WebRequestUtil.fillResponse(url, context.getParameterString(testMock), String.valueOf(System.currentTimeMillis()), true,
+                new ResponseFiller() {
+                    public ServerResponse fill(InputStream is) {
+                        return context.fillResponse(testMock, is);
+                    }
+                }
+        );
+        Api_DEMO_DemoEntity resp = testMock.getResponse();
+        Assert.assertEquals(ApiCode.SUCCESS, testMock.getReturnCode());
+        Assert.assertEquals(resp.id, 1234567);
+        Assert.assertEquals(resp.name, "mock test");
+    }
+
+    @Test
+    public void testMockService() {
+        final ApiContext context = new ApiContext("1", 123);
+        final Demo_TestMockService testMock = new Demo_TestMockService("NAME");
+        WebRequestUtil.fillResponse(url, context.getParameterString(testMock), String.valueOf(System.currentTimeMillis()), true,
+                new ResponseFiller() {
+                    public ServerResponse fill(InputStream is) {
+                        return context.fillResponse(testMock, is);
+                    }
+                }
+        );
+        Api_DEMO_DemoEntity resp = testMock.getResponse();
+        Assert.assertEquals(ApiCode.SUCCESS, testMock.getReturnCode());
+        Assert.assertEquals(resp.id, 7654321);
+        Assert.assertEquals(resp.name, "mock service test NAME");
+    }
+
+    @Test
+    public void testIgnoreParameterForSecurity() {
+        final ApiContext context = new ApiContext("1", 123);
+        final Demo_TestMockService testMock = new Demo_TestMockService("NAME");
+        final Demo_TestIgnoreParameterForSecurity testIgnoreParameterForSecurity = new Demo_TestIgnoreParameterForSecurity("hahaha");
+        final BaseRequest[] reqs = new BaseRequest[] { testMock, testIgnoreParameterForSecurity };
+        WebRequestUtil.fillResponse(url, context.getParameterString(reqs),
+                String.valueOf(System.currentTimeMillis()), true,
+                new ResponseFiller() {
+                    public ServerResponse fill(InputStream is) {
+                        return context.fillResponse(reqs, is);
+                    }
+                }
+        );
+        Api_DEMO_DemoEntity resp = testMock.getResponse();
+        Assert.assertEquals(ApiCode.SUCCESS, testMock.getReturnCode());
+        Assert.assertEquals(resp.id, 7654321);
+        Assert.assertEquals(resp.name, "mock service test NAME");
     }
 }

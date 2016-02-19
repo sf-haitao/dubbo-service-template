@@ -1,6 +1,8 @@
 package com.sfebiz.demo.service.test;
 
+import com.sfebiz.demo.api.DemoMockService;
 import com.sfebiz.demo.api.DemoService;
+import com.sfebiz.demo.mock.MockServiceImpl;
 import com.sfebiz.demo.service.http.DemoServiceImpl;
 import net.pocrd.core.ApiDocumentationHelper;
 import net.pocrd.core.ApiManager;
@@ -43,6 +45,7 @@ public class ApiSdkJavaGeneratorTest {
         prop.setProperty("net.pocrd.apiSdkJavaPkgName", "com.sfebiz.demo.client");
         CodeGenConfig.init(prop);
         List<ApiMethodInfo> infoList = ApiManager.parseApi(DemoService.class, new DemoServiceImpl());
+        infoList.addAll(ApiManager.parseApi(DemoMockService.class, new MockServiceImpl()));
         ApiMethodInfo[] array = new ApiMethodInfo[infoList.size()];
         infoList.toArray(array);
         Serializer<Document> docs = POJOSerializerProvider.getSerializer(Document.class);

@@ -35,7 +35,7 @@ public class Api_CallState {
      * 反序列化函数，用于从json节点对象反序列化本类型实例
      */
     public static Api_CallState deserialize(JSONObject json) throws JSONException {
-        if (json != null && json != JSONObject.NULL && json.length() > 0) {
+        if (json != null && json.length() > 0) {
             Api_CallState result = new Api_CallState();
             
             // 返回值
